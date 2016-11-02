@@ -19,8 +19,13 @@ public class Main {
             System.out.print(  "\nEnter \"3\" to book room.");
             System.out.print(  "\nEnter \"4\" to cancel reservation.");
             System.out.print(  "\nEnter \"5\" to find room by params.");
+            System.out.print(  "\nEnter \"Q\" or \"q\" to quit.");
             System.out.print("\n\nEnter your choice : ");
             String choice = br.readLine();
+            if ("Q".equals(choice) || "q".equals(choice)) {
+                System.out.println("Application terminated.");
+                break;
+            }
 
             while (true) {
                 switch (choice) {
