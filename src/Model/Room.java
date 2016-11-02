@@ -10,7 +10,22 @@ public class Room extends AbstractEntity {
 
     private boolean isReserved;
 
-    private long id;
+    private long hotelId;
+
+    public Room(double price, int persons, User userReserved, boolean isReserved, long hotelId) {
+        this.price = price;
+        this.persons = persons;
+        this.userReserved = userReserved;
+        this.isReserved = isReserved;
+        this.hotelId = hotelId;
+
+    }
+
+    public long getHotelId() {
+        return hotelId;
+    }
+
+    public static int gett(){return 1;}
 
     public double getPrice() {
         return price;
@@ -42,15 +57,5 @@ public class Room extends AbstractEntity {
 
     public void setReserved(boolean reserved) {
         isReserved = reserved;
-    }
-
-    @Override
-    public long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(long id) {
-        this.id = id;
     }
 }
