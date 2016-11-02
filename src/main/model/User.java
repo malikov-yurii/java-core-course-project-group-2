@@ -1,4 +1,7 @@
 package main.model;
 
-public class User extends AbstractEntity {
+public class User extends NamedEntity {
+    public User(String name) {
+        super(name);
+    }
 }
