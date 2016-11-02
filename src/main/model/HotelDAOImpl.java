@@ -1,6 +1,8 @@
-package Model;
+package main.model;
 
 import java.util.*;
+
+import static main.datasourse.TestData.*;
 
 public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
@@ -8,13 +10,6 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
             HOTEL_DRUGHBA_KIEV, HOTEL_UKRAINA_KIEV, HOTEL_OPTIMA_CHERKASSY,
             HOTEL_APELSIN_CHERKASSY, HOTEL_DNESTR_LVIV, HOTEL_GETMAN_LVIV
     ));
-
-    public final static Hotel HOTEL_DRUGHBA_KIEV      = new Hotel("Drughba", "Kiev");
-    public final static Hotel HOTEL_UKRAINA_KIEV      = new Hotel("Ukraina", "Kiev");
-    public final static Hotel HOTEL_OPTIMA_CHERKASSY  = new Hotel("Optima", "Cherkassy");
-    public final static Hotel HOTEL_APELSIN_CHERKASSY = new Hotel("Apelsin", "Cherkassy");
-    public final static Hotel HOTEL_DNESTR_LVIV       = new Hotel("Dnestr", "Lviv");
-    public final static Hotel HOTEL_GETMAN_LVIV       = new Hotel("Getman", "Lviv");
 
     public Hotel getByNameAndCity(String name, String city){
         return hotels

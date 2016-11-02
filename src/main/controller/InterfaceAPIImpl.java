@@ -1,6 +1,6 @@
-package Controller;
+package main.controller;
 
-import Model.Hotel;
+import main.model.Hotel;
 
 import java.util.Collection;
 import java.util.Map;

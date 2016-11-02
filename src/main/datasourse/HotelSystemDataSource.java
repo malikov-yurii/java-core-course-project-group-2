@@ -1,6 +1,8 @@
-import Model.HotelDAOImpl;
-import Model.RoomDAOImpl;
-import Model.UserDAOImpl;
+package main.datasourse;
+
+import main.model.HotelDAOImpl;
+import main.model.RoomDAOImpl;
+import main.model.UserDAOImpl;
 
 public class HotelSystemDataSource {
     private static final UserDAOImpl userDAO = new UserDAOImpl();

@@ -1,4 +1,4 @@
-package Model;
+package main.model;
 
 public abstract class AbstractEntity {
 

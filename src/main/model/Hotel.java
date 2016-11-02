@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.Collection;
+package main.model;
 
 public class Hotel extends AbstractEntity {
 
