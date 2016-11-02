@@ -3,6 +3,7 @@ package main.model;
 import java.util.List;
 
 public class AbstractDAOImpl<T extends AbstractEntity>  implements AbstractDAO<T> {
+
     @Override
     public T save(T object) {
         return null;

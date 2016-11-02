@@ -1,6 +1,6 @@
 package main.model;
 
-public class NamedEntity extends AbstractEntity {
+public abstract class NamedEntity extends AbstractEntity {
     private String name;
 
     public NamedEntity(String name) {

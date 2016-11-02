@@ -1,25 +1,40 @@
 package main.view;
 
-import main.model.User;
+import main.datasourse.TestData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
 
-        System.out.print("Please authorize to continue (Enter your name): ");
+        TestData.initializeDAOWithTestData();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        User authorizedUser = new User(br.readLine());
+/*
+//      Я пока оставлю это здесь, пусть будет как один из вариантов, так как я его еще днем накидал
+//      Но я не смотрел последний вебинар, поэтому правильная реализация авторизации за Михаилом Косицким.
+        while (true) {
+            System.out.print("Please authorize to continue. \nEnter your login : ");
+            String login = br.readLine();
+            System.out.print("\nEnter your password : ");
+            String password = br.readLine();
+            User authorizedUser = new User(login, password);
+            if (UserDAOImpl.getInstance().getUsers().contains(authorizedUser)) {
+                System.out.println("Access allowed.");
+                break;
+            }
+            System.out.println("Access denied.");
+        }
+*/
 
-        while (true){
-            System.out.print(  "\nEnter \"1\" to find hotel by name.");
-            System.out.print(  "\nEnter \"2\" to find hotel by city.");
-            System.out.print(  "\nEnter \"3\" to book room.");
-            System.out.print(  "\nEnter \"4\" to cancel reservation.");
-            System.out.print(  "\nEnter \"5\" to find room by params.");
-            System.out.print(  "\nEnter \"Q\" or \"q\" to quit.");
+        while (true) {
+            System.out.print("\nEnter \"1\" to find hotel by name.");
+            System.out.print("\nEnter \"2\" to find hotel by city.");
+            System.out.print("\nEnter \"3\" to book room.");
+            System.out.print("\nEnter \"4\" to cancel reservation.");
+            System.out.print("\nEnter \"5\" to find room by params.");
+            System.out.print("\nEnter \"Q\" or \"q\" to quit.");
             System.out.print("\n\nEnter your choice : ");
             String choice = br.readLine();
             if ("Q".equals(choice) || "q".equals(choice)) {

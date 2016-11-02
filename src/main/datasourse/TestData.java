@@ -1,7 +1,9 @@
 package main.datasourse;
 
-import main.model.Hotel;
-import main.model.Room;
+import main.model.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class TestData {
     public final static Hotel HOTEL_DRUGHBA_KIEV      = new Hotel("Drughba", "Kiev");
@@ -76,4 +78,22 @@ public class TestData {
     public static final Room ROOM7_GETMAN = new Room(280.50, 4, null, false, HOTEL_GETMAN_LVIV.getId());
     public static final Room ROOM8_GETMAN = new Room(290.50, 2, null, false, HOTEL_GETMAN_LVIV.getId());
     public static final Room ROOM9_GETMAN = new Room(300.50, 1, null, false, HOTEL_GETMAN_LVIV.getId());
+
+    public static void initializeDAOWithTestData(){
+        HotelDAOImpl.initialize(new HashSet<>(Arrays.asList(
+                HOTEL_DRUGHBA_KIEV, HOTEL_UKRAINA_KIEV, HOTEL_OPTIMA_CHERKASSY,
+                HOTEL_APELSIN_CHERKASSY, HOTEL_DNESTR_LVIV, HOTEL_GETMAN_LVIV
+        )));
+
+        RoomDAOImpl.initialize(new HashSet<>(Arrays.asList(
+                ROOM0_UKRAINA, ROOM1_UKRAINA, ROOM2_UKRAINA, ROOM3_UKRAINA, ROOM4_UKRAINA, ROOM5_UKRAINA, ROOM6_UKRAINA, ROOM7_UKRAINA, ROOM8_UKRAINA, ROOM9_UKRAINA,
+                ROOM0_DRUGHBA, ROOM1_DRUGHBA, ROOM2_DRUGHBA, ROOM3_DRUGHBA, ROOM4_DRUGHBA, ROOM5_UKRAINA, ROOM6_DRUGHBA, ROOM7_DRUGHBA, ROOM8_DRUGHBA, ROOM9_DRUGHBA,
+                ROOM0_APELSIN, ROOM1_APELSIN, ROOM2_APELSIN, ROOM3_APELSIN, ROOM4_APELSIN, ROOM5_APELSIN, ROOM6_APELSIN, ROOM7_APELSIN, ROOM8_APELSIN, ROOM9_APELSIN,
+                ROOM0_OPTIMA, ROOM1_OPTIMA, ROOM2_OPTIMA, ROOM3_OPTIMA, ROOM4_OPTIMA, ROOM5_OPTIMA, ROOM6_OPTIMA, ROOM7_OPTIMA, ROOM8_OPTIMA, ROOM9_OPTIMA,
+                ROOM0_DNESTR, ROOM1_DNESTR, ROOM2_DNESTR, ROOM3_DNESTR, ROOM4_DNESTR, ROOM5_DNESTR, ROOM6_DNESTR, ROOM7_DNESTR, ROOM8_DNESTR, ROOM9_DNESTR,
+                ROOM0_GETMAN, ROOM1_GETMAN, ROOM2_GETMAN, ROOM3_GETMAN, ROOM4_GETMAN, ROOM5_GETMAN, ROOM6_GETMAN, ROOM7_GETMAN, ROOM8_GETMAN, ROOM9_GETMAN
+        )));
+
+        UserDAOImpl.initialize(new HashSet<>());
+    }
 }

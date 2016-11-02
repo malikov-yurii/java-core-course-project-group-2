@@ -1,45 +1,29 @@
 package main.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-public class UserDAOImpl implements AbstractDAO<User> {
+public class UserDAOImpl extends AbstractDAOImpl<User> {
 
-    private final Collection<User> users = new ArrayList<>();
+    private static Collection<User> users;
 
-    @Override
-    public User save(User object) {
-        return null;
-    }
+    private static UserDAOImpl singletonInstance;
 
-    @Override
-    public void delete(User object) {
+    private UserDAOImpl(){
 
     }
 
-    @Override
-    public void deleteAll(List<User> list) {
-
+    public static void initialize(Collection<User> collection){
+        if (singletonInstance == null) {
+            singletonInstance = new UserDAOImpl();
+            users = collection;
+        }
     }
 
-    @Override
-    public void saveAll(List<User> list) {
-
+    public static UserDAOImpl getInstance(){
+        return singletonInstance;
     }
 
-    @Override
-    public List<User> getList() {
-        return null;
-    }
-
-    @Override
-    public void deleteById(long id) {
-
-    }
-
-    @Override
-    public User get(long id) {
-        return null;
+    public Collection<User> getUsers() {
+        return users;
     }
 }
