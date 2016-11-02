@@ -1,8 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class UserDAOImpl implements AbstractDAO<User> {
+
+    private final Collection<User> users = new ArrayList<>();
+
     @Override
     public User save(User object) {
         return null;

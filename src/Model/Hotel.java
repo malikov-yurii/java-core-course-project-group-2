@@ -8,8 +8,10 @@ public class Hotel extends AbstractEntity {
 
     private String city;
 
-    private Collection<Room> rooms;
-
+    public Hotel(String hotelName, String city) {
+        this.hotelName = hotelName;
+        this.city = city;
+    }
 
     public String getHotelName() {
         return hotelName;
@@ -27,11 +29,4 @@ public class Hotel extends AbstractEntity {
         this.city = city;
     }
 
-    public Collection<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(Collection<Room> rooms) {
-        this.rooms = rooms;
-    }
 }

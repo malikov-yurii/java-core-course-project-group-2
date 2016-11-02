@@ -1,13 +1,16 @@
 package Model;
 
 public abstract class AbstractEntity {
-    long id;
+
+    private static long idSequence = 1000;
+
+    private long id;
+
+    public AbstractEntity() {
+        this.id = idSequence++;
+    }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }
