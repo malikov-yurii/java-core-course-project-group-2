@@ -32,7 +32,7 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
     public Hotel getByNameAndCity(String name, String city){
         return hotels
                 .stream()
-                .filter(hotel -> name.equals(hotel.getHotelName()) && city.equals(hotel.getCity()))
+                .filter(hotel -> name.equals(hotel.getName()) && city.equals(hotel.getCity()))
                 .findFirst()
                 .get();
     }
