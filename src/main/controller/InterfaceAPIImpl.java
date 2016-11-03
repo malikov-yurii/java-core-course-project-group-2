@@ -21,6 +21,7 @@ import java.util.Map;
  * require collection of <Hotel>
  * require collection of <User>
  * require collection of <Room>
+ *     takes from DAO(empty constructor) of as parameters
  *
  * working(additional testing is appreciated):
  * public Collection<Hotel> findHotelbyCity(String city)
@@ -166,12 +167,15 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         return null;
     }
 
+    //get data from database
+    //TODO try catch for empty DB
     public InterfaceAPIImpl() {
         hotels = HotelDAOImpl.getInstance().getHotels();
         users = UserDAOImpl.getInstance().getUsers();
         rooms = RoomDAOImpl.getInstance().getCollection();
     }
 
+    //get data from input parameters
     public InterfaceAPIImpl(List<Hotel> hotels, List<User> users, List<Room> rooms) {
         this.hotels = hotels;
         this.users = users;
