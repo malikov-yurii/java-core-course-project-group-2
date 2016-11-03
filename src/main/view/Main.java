@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    
     public static void clrscr(){
         for(int clear = 0; clear < 25; clear++)
         {
@@ -41,6 +42,7 @@ public class Main {
 
         String choice1 = "";
         InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
+
 
         while (!choice1.equalsIgnoreCase("0")){
             System.out.println("\n---------Menu---------\n\n1. Find hotel by name\n2. Find hotel by city\n3. Book room\n4. Cancel reservation\n5. Find room by params.\n0. Quit.\n");
