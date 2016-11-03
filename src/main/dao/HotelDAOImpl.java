@@ -6,18 +6,14 @@ import java.util.Collection;
 
 public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
 
-    private static Collection<Hotel> hotels;
-
     private static HotelDAOImpl singletonInstance;
 
-    private HotelDAOImpl(){
-
-    }
+    private HotelDAOImpl(){}
 
     public static void initialize(Collection<Hotel> collection){
         if (singletonInstance == null) {
             singletonInstance = new HotelDAOImpl();
-            hotels = collection;
+            singletonInstance.setCollection(collection);
         }
     }
 
@@ -25,12 +21,12 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
         return singletonInstance;
     }
 
-    public Collection<Hotel> getHotels() {
-        return hotels;
+    public static Collection<Hotel> getHotels() {
+        return singletonInstance.getCollection();
     }
 
     public Hotel getByNameAndCity(String name, String city){
-        return hotels
+        return singletonInstance.getCollection()
                 .stream()
                 .filter(hotel -> name.equals(hotel.getName()) && city.equals(hotel.getCity()))
                 .findFirst()

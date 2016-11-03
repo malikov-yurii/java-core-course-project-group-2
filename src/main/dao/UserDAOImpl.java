@@ -6,18 +6,14 @@ import java.util.Collection;
 
 public class UserDAOImpl extends AbstractDAOImpl<User> {
 
-    private static Collection<User> users;
-
     private static UserDAOImpl singletonInstance;
 
-    private UserDAOImpl(){
-
-    }
+    private UserDAOImpl(){}
 
     public static void initialize(Collection<User> collection){
         if (singletonInstance == null) {
             singletonInstance = new UserDAOImpl();
-            users = collection;
+            singletonInstance.setCollection(collection);
         }
     }
 
@@ -25,7 +21,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
         return singletonInstance;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public static Collection<User> getUsers() {
+        return singletonInstance.getCollection();
     }
 }

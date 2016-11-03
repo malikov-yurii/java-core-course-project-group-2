@@ -6,18 +6,14 @@ import java.util.Collection;
 
 public class RoomDAOImpl extends AbstractDAOImpl<Room> {
 
-    private static Collection<Room> rooms;
-
     private static RoomDAOImpl singletonInstance;
 
-    private RoomDAOImpl(){
-
-    }
+    private RoomDAOImpl(){}
 
     public static void initialize(Collection<Room> collection){
         if (singletonInstance == null) {
             singletonInstance = new RoomDAOImpl();
-            rooms = collection;
+            singletonInstance.setCollection(collection);
         }
     }
 
@@ -25,7 +21,7 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
         return singletonInstance;
     }
 
-    public Collection<Room> getCollection() {
-        return rooms;
+    public static Collection<Room> getRooms() {
+        return singletonInstance.getCollection();
     }
 }
