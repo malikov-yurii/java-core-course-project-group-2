@@ -1,4 +1,6 @@
-package main.model;
+package main.dao;
+
+import main.model.User;
 
 import java.util.Collection;
 

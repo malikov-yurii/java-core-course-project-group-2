@@ -1,5 +1,8 @@
 package main.datasourse;
 
+import main.dao.HotelDAOImpl;
+import main.dao.RoomDAOImpl;
+import main.dao.UserDAOImpl;
 import main.model.*;
 
 import java.util.Arrays;

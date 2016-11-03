@@ -1,4 +1,6 @@
-package main.model;
+package main.dao;
+
+import main.model.Hotel;
 
 import java.util.Collection;
 
