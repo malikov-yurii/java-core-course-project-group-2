@@ -6,9 +6,7 @@ package main.controller;
 import main.dao.HotelDAOImpl;
 import main.dao.RoomDAOImpl;
 import main.dao.UserDAOImpl;
-import main.model.Hotel;
-import main.model.Room;
-import main.model.User;
+import main.model.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -170,9 +168,15 @@ public class InterfaceAPIImpl implements InterfaceAPI{
     //get data from database
     //TODO try catch for empty DB
     public InterfaceAPIImpl() {
-        hotels = HotelDAOImpl.getInstance().getHotels();
-        users = UserDAOImpl.getInstance().getUsers();
-        rooms = RoomDAOImpl.getInstance().getCollection();
+        try{
+            hotels = HotelDAOImpl.getInstance().getHotels();
+            users = UserDAOImpl.getInstance().getUsers();
+            rooms = RoomDAOImpl.getInstance().getCollection();
+        }catch (NullPointerException e){
+            //Пока что просто обработали и отправили письмо
+            //System.out.println("There is NullPointerException");
+        }
+
     }
 
     //get data from input parameters
@@ -181,4 +185,12 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         this.users = users;
         this.rooms = rooms;
     }
+
+    //before start we need to register our user by MK
+    public void registerUser(User user){
+        CurrentUser currentUser = new CurrentUser(user);
+        currentUser.setCurrentUser(user);
+        System.out.println(user+" is registered...");
+    }
+
 }

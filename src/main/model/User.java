@@ -10,6 +10,14 @@ public class User extends NamedEntity {
     }
 
     @Override
+    public String toString() {
+        return "User{" +
+                "Name='" + getName() + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -26,4 +34,6 @@ public class User extends NamedEntity {
         result = 31 * result + getName().hashCode();
         return result;
     }
+
+
 }

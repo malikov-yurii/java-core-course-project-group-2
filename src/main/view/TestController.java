@@ -4,11 +4,13 @@ import main.controller.InterfaceAPI;
 import main.controller.InterfaceAPIImpl;
 import main.dao.UserDAOImpl;
 import main.datasourse.TestData;
+import main.model.CurrentUser;
 import main.model.Hotel;
 import main.model.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Scanner;
 
 /**
  * Created by Mykhailo on 11/3/2016.
@@ -16,6 +18,17 @@ import java.util.Collection;
  */
 public class TestController {
     public static void main(String[] args) {
+        InterfaceAPIImpl interfaceAPIImpl = new InterfaceAPIImpl();
+        System.out.print("Введите имя пользователя без пробелов(иначе будет взято только первое слово):");
+        Scanner scanner = new Scanner(System.in);
+        String readUser = scanner.next();
+        System.out.print("Введите пароль:");
+        String readPassword = scanner.next();
+        interfaceAPIImpl.registerUser(new User(readUser, readPassword));
+        scanner.close();
+        System.out.println("The current User is: "+ CurrentUser.getCurrentUser());
+
+
         TestData.initializeDAOWithTestData();
 
         User user = new User("pasha","12134");
