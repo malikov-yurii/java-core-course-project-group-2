@@ -1,15 +1,13 @@
-package Model;
+package main.model;
 
-import java.util.Collection;
-
-public class Hotel extends AbstractEntity {
+public class Hotel extends NamedEntity {
 
     private String hotelName;
 
     private String city;
 
     public Hotel(String hotelName, String city) {
-        this.hotelName = hotelName;
+        super(hotelName);
         this.city = city;
     }
 

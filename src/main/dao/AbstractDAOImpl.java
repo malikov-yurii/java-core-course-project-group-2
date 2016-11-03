@@ -1,8 +1,11 @@
-package Model;
+package main.dao;
+
+import main.model.AbstractEntity;
 
 import java.util.List;
 
 public class AbstractDAOImpl<T extends AbstractEntity>  implements AbstractDAO<T> {
+
     @Override
     public T save(T object) {
         return null;

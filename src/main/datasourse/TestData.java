@@ -1,20 +1,20 @@
-package Model;
+package main.datasourse;
 
+import main.dao.HotelDAOImpl;
+import main.dao.RoomDAOImpl;
+import main.dao.UserDAOImpl;
+import main.model.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
 
-import static Model.HotelDAOImpl.*;
-
-public class RoomDAOImpl implements AbstractDAO<Room> {
-
-    private final Collection<Room> rooms = new HashSet<>(Arrays.asList(
-            ROOM0_UKRAINA, ROOM1_UKRAINA, ROOM2_UKRAINA, ROOM3_UKRAINA, ROOM4_UKRAINA, ROOM5_UKRAINA, ROOM6_UKRAINA, ROOM7_UKRAINA, ROOM8_UKRAINA, ROOM9_UKRAINA,
-            ROOM0_DRUGHBA, ROOM1_DRUGHBA, ROOM2_DRUGHBA, ROOM3_DRUGHBA, ROOM4_DRUGHBA, ROOM5_UKRAINA, ROOM6_DRUGHBA, ROOM7_DRUGHBA, ROOM8_DRUGHBA, ROOM9_DRUGHBA,
-            ROOM0_APELSIN, ROOM1_APELSIN, ROOM2_APELSIN, ROOM3_APELSIN, ROOM4_APELSIN, ROOM5_APELSIN, ROOM6_APELSIN, ROOM7_APELSIN, ROOM8_APELSIN, ROOM9_APELSIN,
-            ROOM0_OPTIMA, ROOM1_OPTIMA, ROOM2_OPTIMA, ROOM3_OPTIMA, ROOM4_OPTIMA, ROOM5_OPTIMA, ROOM6_OPTIMA, ROOM7_OPTIMA, ROOM8_OPTIMA, ROOM9_OPTIMA,
-            ROOM0_DNESTR, ROOM1_DNESTR, ROOM2_DNESTR, ROOM3_DNESTR, ROOM4_DNESTR, ROOM5_DNESTR, ROOM6_DNESTR, ROOM7_DNESTR, ROOM8_DNESTR, ROOM9_DNESTR,
-            ROOM0_GETMAN, ROOM1_GETMAN, ROOM2_GETMAN, ROOM3_GETMAN, ROOM4_GETMAN, ROOM5_GETMAN, ROOM6_GETMAN, ROOM7_GETMAN, ROOM8_GETMAN, ROOM9_GETMAN
-    ));
+public class TestData {
+    public final static Hotel HOTEL_DRUGHBA_KIEV      = new Hotel("Drughba", "Kiev");
+    public final static Hotel HOTEL_UKRAINA_KIEV      = new Hotel("Ukraina", "Kiev");
+    public final static Hotel HOTEL_OPTIMA_CHERKASSY  = new Hotel("Optima", "Cherkassy");
+    public final static Hotel HOTEL_APELSIN_CHERKASSY = new Hotel("Apelsin", "Cherkassy");
+    public final static Hotel HOTEL_DNESTR_LVIV       = new Hotel("Dnestr", "Lviv");
+    public final static Hotel HOTEL_GETMAN_LVIV       = new Hotel("Getman", "Lviv");
 
     public static final Room ROOM0_UKRAINA = new Room(200.50, 2, null, false, HOTEL_UKRAINA_KIEV.getId());
     public static final Room ROOM1_UKRAINA = new Room(220.50, 1, null, false, HOTEL_UKRAINA_KIEV.getId());
@@ -82,38 +82,21 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
     public static final Room ROOM8_GETMAN = new Room(290.50, 2, null, false, HOTEL_GETMAN_LVIV.getId());
     public static final Room ROOM9_GETMAN = new Room(300.50, 1, null, false, HOTEL_GETMAN_LVIV.getId());
 
-    @Override
-    public Room save(Room object) {
-        return null;
-    }
+    public static void initializeDAOWithTestData(){
+        HotelDAOImpl.initialize(new HashSet<>(Arrays.asList(
+                HOTEL_DRUGHBA_KIEV, HOTEL_UKRAINA_KIEV, HOTEL_OPTIMA_CHERKASSY,
+                HOTEL_APELSIN_CHERKASSY, HOTEL_DNESTR_LVIV, HOTEL_GETMAN_LVIV
+        )));
 
-    @Override
-    public void delete(Room object) {
+        RoomDAOImpl.initialize(new HashSet<>(Arrays.asList(
+                ROOM0_UKRAINA, ROOM1_UKRAINA, ROOM2_UKRAINA, ROOM3_UKRAINA, ROOM4_UKRAINA, ROOM5_UKRAINA, ROOM6_UKRAINA, ROOM7_UKRAINA, ROOM8_UKRAINA, ROOM9_UKRAINA,
+                ROOM0_DRUGHBA, ROOM1_DRUGHBA, ROOM2_DRUGHBA, ROOM3_DRUGHBA, ROOM4_DRUGHBA, ROOM5_UKRAINA, ROOM6_DRUGHBA, ROOM7_DRUGHBA, ROOM8_DRUGHBA, ROOM9_DRUGHBA,
+                ROOM0_APELSIN, ROOM1_APELSIN, ROOM2_APELSIN, ROOM3_APELSIN, ROOM4_APELSIN, ROOM5_APELSIN, ROOM6_APELSIN, ROOM7_APELSIN, ROOM8_APELSIN, ROOM9_APELSIN,
+                ROOM0_OPTIMA, ROOM1_OPTIMA, ROOM2_OPTIMA, ROOM3_OPTIMA, ROOM4_OPTIMA, ROOM5_OPTIMA, ROOM6_OPTIMA, ROOM7_OPTIMA, ROOM8_OPTIMA, ROOM9_OPTIMA,
+                ROOM0_DNESTR, ROOM1_DNESTR, ROOM2_DNESTR, ROOM3_DNESTR, ROOM4_DNESTR, ROOM5_DNESTR, ROOM6_DNESTR, ROOM7_DNESTR, ROOM8_DNESTR, ROOM9_DNESTR,
+                ROOM0_GETMAN, ROOM1_GETMAN, ROOM2_GETMAN, ROOM3_GETMAN, ROOM4_GETMAN, ROOM5_GETMAN, ROOM6_GETMAN, ROOM7_GETMAN, ROOM8_GETMAN, ROOM9_GETMAN
+        )));
 
-    }
-
-    @Override
-    public void deleteAll(List<Room> list) {
-
-    }
-
-    @Override
-    public void saveAll(List<Room> list) {
-
-    }
-
-    @Override
-    public List<Room> getList() {
-        return null;
-    }
-
-    @Override
-    public void deleteById(long id) {
-
-    }
-
-    @Override
-    public Room get(long id) {
-        return null;
+        UserDAOImpl.initialize(new HashSet<>());
     }
 }
