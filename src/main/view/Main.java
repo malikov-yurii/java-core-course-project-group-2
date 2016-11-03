@@ -10,13 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    
-    public static void clrscr(){
-        for(int clear = 0; clear < 25; clear++)
-        {
-            System.out.println() ;
-        }
-    }
+
+
 
     public static void main(String[] args) throws IOException {
 
@@ -51,7 +46,7 @@ public class Main {
             switch(choice1){
                 case "1":
                 {
-                    clrscr();
+                    MethodsForMain.clrscr();
                     System.out.println("Enter name of hotel: ");    //find hotel by name
                     String hotname = br.readLine();
                     System.out.println("Rezult of your request: "+interfaceAPI.findHotelbyName(hotname));
@@ -59,7 +54,7 @@ public class Main {
                 }
                 case "2":
                 {
-                    clrscr();
+                    MethodsForMain.clrscr();
                     System.out.println("\nEnter city of hotel: ");  //find hotel by city
                     String hotcity = br.readLine();
                     System.out.println("Rezult of your request: "+interfaceAPI.findHotelbyCity(hotcity));
@@ -67,32 +62,14 @@ public class Main {
                 }
                 case "3":
                 {
-                    clrscr();
-                    System.out.println("Enter room's id: ");        //book room
-                    String roomid = br.readLine();
-                    long a = Integer.valueOf(roomid);
-                    System.out.println("Enter user's id: ");
-                    String userid = br.readLine();
-                    long b = Integer.valueOf(userid);
-                    System.out.println("Enter hotel's id: ");
-                    String hotid = br.readLine();
-                    long c = Integer.valueOf(hotid);
-                    interfaceAPI.bookRoom(a, b, c);
+                    MethodsForMain.clrscr();                    //book room
+                    interfaceAPI.bookRoom(MethodsForMain.RoomId(br), MethodsForMain.UserId(br), MethodsForMain.HotelId(br));
                     break;
                 }
                 case "4":
                 {
-                    clrscr();
-                    System.out.println("Enter room's id: ");    //cancel reserv
-                    String roomid = br.readLine();
-                    long a1 = Integer.valueOf(roomid);
-                    System.out.println("Enter user's id: ");
-                    String userid = br.readLine();
-                    long b1 = Integer.valueOf(userid);
-                    System.out.println("Enter hotel's id: ");
-                    String hotid = br.readLine();
-                    long c1 = Integer.valueOf(hotid);
-                    interfaceAPI.cancelReservation(a1, b1, c1);
+                    MethodsForMain.clrscr();                //cancel reserv
+                    interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), MethodsForMain.UserId(br), MethodsForMain.HotelId(br));
                     break;
                 }
                 case "5":
@@ -104,10 +81,12 @@ public class Main {
                 }
                 case "0":
                 {
-                    clrscr();
+                    MethodsForMain.clrscr();
                     System.out.println("Good Bye!");            //exit
                     break;
                 }
+                default:
+                    System.out.print("\nPlease, choose 1-5 or 0 : ");
             }
         }
 
