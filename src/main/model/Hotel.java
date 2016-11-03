@@ -9,6 +9,15 @@ public class Hotel extends NamedEntity {
         this.city = city;
     }
 
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "name='" + getName() + '\'' +
+                "city='" + city + '\'' +
+                "id='" + getId() + '\'' +
+                '}';
+    }
+
     public String getCity() {
         return city;
     }
