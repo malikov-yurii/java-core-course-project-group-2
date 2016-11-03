@@ -2,12 +2,15 @@ package main.view;
 
 import main.controller.InterfaceAPIImpl;
 import main.datasourse.TestData;
+import main.model.CurrentUser;
+import main.model.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
@@ -33,7 +36,17 @@ public class Main {
             System.out.println("Access denied.");
         }
 */
-
+        //-----------------Start Authorization--------------------------------
+        InterfaceAPIImpl interfaceAPIImpl = new InterfaceAPIImpl();
+        System.out.print("Введите имя пользователя без пробелов(иначе будет взято только первое слово):");
+        Scanner scanner = new Scanner(System.in);
+        String readUser = scanner.next();
+        System.out.print("Введите пароль:");
+        String readPassword = scanner.next();
+        interfaceAPIImpl.registerUser(new User(readUser, readPassword));
+        //scanner.close(); /*Вызывает закрытие потока ввода данных. Подходит для теста, но не для прода*/
+        System.out.println("The current User is: "+ CurrentUser.getCurrentUser());
+        //-----------------------Finish Authorization------------------------
 
         String choice1 = "";
         InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
