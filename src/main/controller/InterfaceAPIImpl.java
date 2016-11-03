@@ -37,9 +37,9 @@ import java.util.Map;
  */
 public class InterfaceAPIImpl implements InterfaceAPI{
 
-    Collection<Hotel> hotels = HotelDAOImpl.getInstance().getHotels();
-    Collection<User> users = UserDAOImpl.getInstance().getUsers();
-    Collection<Room> rooms = RoomDAOImpl.getInstance().getCollection();
+    private Collection<Hotel> hotels;
+    private Collection<User> users;
+    private Collection<Room> rooms;
 
 
     //receive hotel name, return collection of hotels with that name
@@ -88,7 +88,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         }
 
         //break method if room is already reserved
-        if (roomSearch.isReserved() == true){
+        if (roomSearch.isReserved()){
             System.out.println("room is already reserved");
             return;
         }
@@ -109,7 +109,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         }
 
         //break method if room is already reserved
-        if (roomSearch.isReserved() == true){
+        if (roomSearch.isReserved()){
             System.out.println("room is already reserved");
             return;
         }
@@ -167,6 +167,9 @@ public class InterfaceAPIImpl implements InterfaceAPI{
     }
 
     public InterfaceAPIImpl() {
+        hotels = HotelDAOImpl.getInstance().getHotels();
+        users = UserDAOImpl.getInstance().getUsers();
+        rooms = RoomDAOImpl.getInstance().getCollection();
     }
 
     public InterfaceAPIImpl(List<Hotel> hotels, List<User> users, List<Room> rooms) {
