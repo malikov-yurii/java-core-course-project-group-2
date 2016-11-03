@@ -37,19 +37,19 @@ public class Main {
         }
 */
         //-----------------Start Authorization--------------------------------
-        InterfaceAPIImpl interfaceAPIImpl = new InterfaceAPIImpl();
+        InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
         System.out.print("Введите имя пользователя без пробелов(иначе будет взято только первое слово):");
         Scanner scanner = new Scanner(System.in);
         String readUser = scanner.next();
         System.out.print("Введите пароль:");
         String readPassword = scanner.next();
-        interfaceAPIImpl.registerUser(new User(readUser, readPassword));
+        interfaceAPI.registerUser(new User(readUser, readPassword));
         //scanner.close(); /*Вызывает закрытие потока ввода данных. Подходит для теста, но не для прода*/
         System.out.println("The current User is: "+ CurrentUser.getCurrentUser());
         //-----------------------Finish Authorization------------------------
 
         String choice1 = "";
-        InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
+        //InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
 
 
         while (!choice1.equalsIgnoreCase("0")){
