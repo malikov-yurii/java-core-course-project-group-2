@@ -3,6 +3,9 @@ package main.controller;
 
 
 
+import main.dao.HotelDAOImpl;
+import main.dao.RoomDAOImpl;
+import main.dao.UserDAOImpl;
 import main.model.Hotel;
 import main.model.Room;
 import main.model.User;
@@ -19,7 +22,13 @@ import java.util.Map;
  * require collection of <User>
  * require collection of <Room>
  *
- * TODO check if works:-)
+ * working(additional testing is appreciated):
+ * public Collection<Hotel> findHotelbyCity(String city)
+ * public Collection<Hotel> findHotelbyCity(String city)
+ * public void bookRoom(long roomId, long userId, long hotelId)
+ * public void cancelReservation(long roomId, long userId, long hotelId)
+ *
+ * TODO Collection<Hotel> findRoom(Map<String, String> params)
  *
  * TODO Java8
  * TODO Polymorphism
@@ -28,20 +37,19 @@ import java.util.Map;
  */
 public class InterfaceAPIImpl implements InterfaceAPI{
 
-    //TODO delete when collections could be received from DB
-    List<Hotel> hotels = new ArrayList<>();
-    List<User> users = new ArrayList<>();
-    List<Room> rooms = new ArrayList<>();
+    Collection<Hotel> hotels = HotelDAOImpl.getInstance().getHotels();
+    Collection<User> users = UserDAOImpl.getInstance().getUsers();
+    Collection<Room> rooms = RoomDAOImpl.getInstance().getCollection();
 
 
     //receive hotel name, return collection of hotels with that name
     @Override
     public Collection<Hotel> findHotelbyName(String name) {
 
-        Collection<Hotel> searchResult = new ArrayList<>(); // replace for LinkedList?
+        Collection<Hotel> searchResult = new ArrayList<>();
 
         for (Hotel hotel: hotels) {
-            if(hotel.getHotelName().equals(name))
+            if(hotel.getName().equals(name))
                 searchResult.add(hotel);
         }
         return searchResult;
@@ -95,8 +103,14 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         }
 
         //break method if user wasn't found
-        if (roomSearch.isReserved() == true){
+        if (userSearch == null) {
             System.out.println("user wasn't found");
+            return;
+        }
+
+        //break method if room is already reserved
+        if (roomSearch.isReserved() == true){
+            System.out.println("room is already reserved");
             return;
         }
 
@@ -145,11 +159,14 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         roomSearch.setReserved(false);
     }
 
-    //TODO Collection<Hotel> findRoom(Map<String, String> params)
+    //TODO
     @Override
     public Collection<Hotel> findRoom(Map<String, String> params) {
 
         return null;
+    }
+
+    public InterfaceAPIImpl() {
     }
 
     public InterfaceAPIImpl(List<Hotel> hotels, List<User> users, List<Room> rooms) {
