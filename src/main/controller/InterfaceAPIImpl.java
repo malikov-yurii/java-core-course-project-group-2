@@ -22,8 +22,11 @@ import java.util.Map;
  * require collection of <User>
  * require collection of <Room>
  *
- * not ready yet
- *
+ * working(additional testing is appreciated):
+ * public Collection<Hotel> findHotelbyCity(String city)
+ * public Collection<Hotel> findHotelbyCity(String city)
+ * public void bookRoom(long roomId, long userId, long hotelId)
+ * public void cancelReservation(long roomId, long userId, long hotelId)
  *
  * TODO Collection<Hotel> findRoom(Map<String, String> params)
  *
