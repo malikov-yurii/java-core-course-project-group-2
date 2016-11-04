@@ -42,7 +42,7 @@ import static java.lang.Integer.valueOf;
  */
 public class InterfaceAPIImpl implements InterfaceAPI{
 
-
+    private RoomDAOImpl roomDAOImpl = RoomDAOImpl.getInstance();
 
     private Collection<Hotel> hotels;
     private Collection<User> users;
@@ -175,61 +175,30 @@ public class InterfaceAPIImpl implements InterfaceAPI{
     public Collection<Room> findRoom(Map<String, String> params) {
         Collection<Room> result = null;
 
-        // TODO situations with wrong values
-
         //check on price
-        if (params.containsKey("price")) {
-            double price = Double.parseDouble(params.get("price"));
-            result = rooms
-                    .stream()
-                    .filter(room -> room.getPrice() == price)
-                    .collect(Collectors.toSet());
-            //return result;
-        }
-        
+
+            if (params.containsKey("price")) {
+                result.addAll(roomDAOImpl.getRoomByPrice(Double.parseDouble(params.get("price"))));
+            }
+
         //check on persons
         if (params.containsKey("persons")) {
-            int persons = valueOf(params.get("persons"));
-            result.addAll(rooms
-                    .stream()
-                    .filter(room -> room.getPersons() == persons)
-                    .collect(Collectors.toSet()));
-            // return result;
+            result.addAll(roomDAOImpl.getRoomByPrice(valueOf(params.get("persons"))));
         }
 
         //check on hotelid
         if (params.containsKey("hotel") || params.containsKey("hotelId")) {
-            int hotelId = valueOf(params.get("hotel"));
-            result.addAll(rooms
-                    .stream()
-                    .filter(room -> room.getHotelId() == hotelId)
-                    .collect(Collectors.toSet()));
-            //return result;
-
+            result.addAll(roomDAOImpl.getRoomByHotelId(valueOf(params.get("hotel"))));
         }
 
         //check on roomid
         if (params.containsKey("room") || params.containsKey("roomId")) {
-            int roomId = valueOf(params.get("room"));
-                result.addAll(rooms
-                        .stream()
-                        .filter(room -> room.getId() == roomId)
-                        .collect(Collectors.toSet()));
-
-                //return result;
+                result.addAll(roomDAOImpl.getRoomByRoomlId(valueOf(params.get("room"))));
         }
-        else System.out.println("Wrong parameter");
+        //else  System.out.println("Wrong parameter");
 
         return result;
     }
-/*
-  .filter(room ->room.getId() == hotelId)
-        // TODO situations with not all parameters
-        return result = rooms
-              .stream()
-              .filter(room -> room.getPrice() == price && room.getHotelId() == hotelId && room.getPersons() == persons)
-              .collect(Collectors.toSet());
-*/
 
 
     //get data from database
