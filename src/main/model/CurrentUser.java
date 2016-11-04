@@ -1,10 +1,12 @@
 package main.model;
 /*by Mykhailo Kosynskyi
- In this class we will be stored and get our current user from keyboard*/
+ In this class we will be stored and get our current user from keyboard
+ MS: maybe it should extend User?
+ */
 public class CurrentUser {
     public static User currentUser;
 
-    public CurrentUser(User user) {
+    public CurrentUser() {
     }
 
     public static User getCurrentUser() {
