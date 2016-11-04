@@ -1,6 +1,7 @@
 package main.view;
 
 import main.controller.InterfaceAPIImpl;
+import main.dao.RoomDAOImpl;
 import main.datasourse.TestData;
 import main.model.CurrentUser;
 import main.model.User;
@@ -59,7 +60,8 @@ public class Main {
             switch(choice1){
                 case "1":
                 {
-                    MethodsForMain.clrscr();
+
+                    // MethodsForMain.clrscr();
                     System.out.println("Enter name of hotel: ");    //find hotel by name
                     String hotname = br.readLine();
                     System.out.println("Rezult of your request: "+interfaceAPI.findHotelbyName(hotname));
@@ -67,7 +69,7 @@ public class Main {
                 }
                 case "2":
                 {
-                    MethodsForMain.clrscr();
+                    //MethodsForMain.clrscr();
                     System.out.println("\nEnter city of hotel: ");  //find hotel by city
                     String hotcity = br.readLine();
                     System.out.println("Rezult of your request: "+interfaceAPI.findHotelbyCity(hotcity));
@@ -76,12 +78,16 @@ public class Main {
                 case "3":
                 {
                     MethodsForMain.clrscr();                    //book room
+                    //MethodsForMain.PrintFreeRooms();  //print available rooms
                     interfaceAPI.bookRoom(MethodsForMain.RoomId(br), MethodsForMain.UserId(br), MethodsForMain.HotelId(br));
                     break;
+
+
                 }
                 case "4":
                 {
                     MethodsForMain.clrscr();                //cancel reserv
+                    //MethodsForMain.PrintUserRooms(); //print rooms of current user
                     interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), MethodsForMain.UserId(br), MethodsForMain.HotelId(br));
                     break;
                 }
@@ -94,7 +100,7 @@ public class Main {
                 }
                 case "0":
                 {
-                    MethodsForMain.clrscr();
+                    //MethodsForMain.clrscr();
                     System.out.println("Good Bye!");            //exit
                     break;
                 }
