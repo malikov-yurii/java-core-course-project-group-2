@@ -27,6 +27,8 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
         return singletonInstance.getCollection();
     }
 
+/*
+    we already have same method. Fell free to use it ->       public T save(T object)
     public static void saveUser(User user) {
         if (singletonInstance == null) {
             singletonInstance = new UserDAOImpl();
@@ -34,4 +36,5 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
         singletonInstance.save(user);
         System.out.println("User is saved");
     }
+    */
 }
