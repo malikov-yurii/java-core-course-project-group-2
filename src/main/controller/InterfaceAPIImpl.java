@@ -11,10 +11,7 @@ import main.model.Hotel;
 import main.model.Room;
 import main.model.User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.valueOf;
@@ -173,12 +170,12 @@ public class InterfaceAPIImpl implements InterfaceAPI{
     // need to receive all parameters: price, persons, hotelId
     @Override
     public Collection<Room> findRoom(Map<String, String> params) {
-        Collection<Room> result = null;
+        Collection<Room> result = new HashSet<>();
 
         //check on price
 
             if (params.containsKey("price")) {
-                result.addAll(roomDAOImpl.getRoomByPrice(Double.parseDouble(params.get("price"))));
+                result = roomDAOImpl.getRoomByPrice(Double.parseDouble(params.get("price")));
             }
 
         //check on persons
@@ -188,12 +185,12 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
         //check on hotelid
         if (params.containsKey("hotel") || params.containsKey("hotelId")) {
-            result.addAll(roomDAOImpl.getRoomByHotelId(valueOf(params.get("hotel"))));
+            result.addAll(roomDAOImpl.getRoomByHotelId(Long.parseLong(params.get("hotel"))));
         }
 
         //check on roomid
         if (params.containsKey("room") || params.containsKey("roomId")) {
-                result.addAll(roomDAOImpl.getRoomByRoomId(valueOf(params.get("room"))));
+                result.addAll(roomDAOImpl.getRoomByRoomId(Long.parseLong(params.get("room"))));
         }
         //else  System.out.println("Wrong parameter");
 
