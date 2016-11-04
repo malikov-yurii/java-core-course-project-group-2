@@ -3,7 +3,7 @@ package main.dao;
 import main.model.Hotel;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
@@ -27,24 +27,24 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
         return singletonInstance.getCollection();
     }
 
-    public List<Hotel> getHotelByName(String name){
+    public Set<Hotel> getHotelByName(String name){
         return getCollection()
                 .stream()
                 .filter(h -> name.equals(h.getName()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public List<Hotel> getHotelByCity(String city){
+    public Set<Hotel> getHotelByCity(String city){
         return getCollection()
                 .stream()
                 .filter(h -> city.equals(h.getCity()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public List<Hotel> getHotelByNameAndCity(String name, String city){
+    public Set<Hotel> getHotelByNameAndCity(String name, String city){
         return getCollection()
                 .stream()
                 .filter(h -> name.equals(h.getName()) && city.equals(h.getCity()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }
