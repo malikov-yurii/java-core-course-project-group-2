@@ -42,7 +42,7 @@ public class MethodsForMain {
         return Integer.valueOf(hotid);
     }
 
-    // prints rooms from db, return false is there are no free rooms
+    // prints rooms from db, return false if there are no free rooms
     public final static boolean PrintFreeRooms() throws IOException {
         boolean anyReserved = false;
 
@@ -60,7 +60,7 @@ public class MethodsForMain {
         return anyReserved;
     }
 
-    //prints rooms reserved by CurrentUser, return false is there are no rooms reserved
+    //prints rooms reserved by CurrentUser, return false if there are no rooms reserved
     public final static boolean PrintUserRooms() throws IOException {
         boolean anyReserved = false;
 
