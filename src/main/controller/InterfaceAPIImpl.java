@@ -183,7 +183,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
         //check on persons
         if (params.containsKey("persons")) {
-            result.addAll(roomDAOImpl.getRoomByPrice(valueOf(params.get("persons"))));
+            result.addAll(roomDAOImpl.getRoomByPersons(valueOf(params.get("persons"))));
         }
 
         //check on hotelid
