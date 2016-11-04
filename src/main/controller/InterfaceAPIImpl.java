@@ -19,7 +19,7 @@ import java.util.Map;
  * require collection of <Hotel>
  * require collection of <User>
  * require collection of <Room>
- *     takes from DAO(empty constructor) of as parameters
+ *     takes from DAO(empty constructor) or as parameters
  *
  * working(additional testing is appreciated):
  * public Collection<Hotel> findHotelbyCity(String city)
@@ -118,6 +118,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
         //set isReserved flag for true
         roomSearch.setReserved(true);
+        System.out.println("room is reserved");
 
     }
 
@@ -156,6 +157,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
         //set isReserved flag for false
         roomSearch.setReserved(false);
+        System.out.println("reservation is canceled");
     }
 
     //TODO
@@ -169,9 +171,9 @@ public class InterfaceAPIImpl implements InterfaceAPI{
     //TODO try catch for empty DB
     public InterfaceAPIImpl() {
         try{
-            hotels = HotelDAOImpl.getInstance().getHotels();
-            users = UserDAOImpl.getInstance().getUsers();
-            rooms = RoomDAOImpl.getInstance().getCollection();
+            hotels = HotelDAOImpl.getHotels();
+            users = UserDAOImpl.getUsers();
+            rooms = RoomDAOImpl.getRooms();
         }catch (NullPointerException e){
             //Пока что просто обработали и отправили письмо
             //System.out.println("There is NullPointerException");
@@ -188,9 +190,11 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
     //before start we need to register our user by MK
     public void registerUser(User user){
-        CurrentUser currentUser = new CurrentUser(user);
+        CurrentUser currentUser = new CurrentUser();
         currentUser.setCurrentUser(user);
         System.out.println(user+" is registered...");
+
+        UserDAOImpl.saveUser(user);
     }
 
 }
