@@ -6,11 +6,16 @@ package main.controller;
 import main.dao.HotelDAOImpl;
 import main.dao.RoomDAOImpl;
 import main.dao.UserDAOImpl;
-import main.model.*;
+import main.model.CurrentUser;
+import main.model.Hotel;
+import main.model.Room;
+import main.model.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.lang.Integer.valueOf;
 
@@ -37,6 +42,8 @@ import static java.lang.Integer.valueOf;
  */
 public class InterfaceAPIImpl implements InterfaceAPI{
 
+
+
     private Collection<Hotel> hotels;
     private Collection<User> users;
     private Collection<Room> rooms;
@@ -47,7 +54,6 @@ public class InterfaceAPIImpl implements InterfaceAPI{
     public Collection<Hotel> findHotelbyName(String name) {
 
         Collection<Hotel> searchResult = new ArrayList<>();
-
         for (Hotel hotel: hotels) {
             if(hotel.getName().equals(name))
                 searchResult.add(hotel);
@@ -210,7 +216,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         currentUser.setCurrentUser(user);
         System.out.println(user+" is registered...");
 
-        UserDAOImpl.saveUser(user);
+        UserDAOImpl.getInstance().save(user);
     }
 
 }

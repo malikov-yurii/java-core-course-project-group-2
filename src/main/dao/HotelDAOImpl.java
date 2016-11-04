@@ -24,12 +24,4 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
     public static Collection<Hotel> getHotels() {
         return singletonInstance.getCollection();
     }
-
-    public Hotel getByNameAndCity(String name, String city){
-        return singletonInstance.getCollection()
-                .stream()
-                .filter(hotel -> name.equals(hotel.getName()) && city.equals(hotel.getCity()))
-                .findFirst()
-                .get();
-    }
 }

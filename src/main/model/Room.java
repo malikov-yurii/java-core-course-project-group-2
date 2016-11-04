@@ -35,8 +35,6 @@ public class Room extends AbstractEntity {
         return hotelId;
     }
 
-    public static int gett(){return 1;}
-
     public double getPrice() {
         return price;
     }

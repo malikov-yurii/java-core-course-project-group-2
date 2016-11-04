@@ -8,9 +8,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
 
     private static UserDAOImpl singletonInstance;
 
-    private UserDAOImpl(){
-
-    }
+    private UserDAOImpl(){}
 
     public static void initialize(Collection<User> collection){
         if (singletonInstance == null) {
@@ -27,11 +25,12 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
         return singletonInstance.getCollection();
     }
 
-    public static void saveUser(User user) {
+//   we already have same method. Fell free to use it ->       public T save(T object)
+    /*public static void saveUser(User user) {
         if (singletonInstance == null) {
             singletonInstance = new UserDAOImpl();
         }
         singletonInstance.save(user);
         System.out.println("user is saved");
-    }
+    }*/
 }

@@ -35,6 +35,4 @@ public class User extends NamedEntity {
         result = 31 * result + getName().hashCode();
         return result;
     }
-
-
 }
