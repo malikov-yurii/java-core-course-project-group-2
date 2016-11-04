@@ -21,6 +21,16 @@ public class Room extends AbstractEntity {
 
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "price=" + price +
+                ", persons=" + persons +
+                ", room ID=" + getId() +
+                ", hotelId=" + hotelId +
+                '}';
+    }
+
     public long getHotelId() {
         return hotelId;
     }
