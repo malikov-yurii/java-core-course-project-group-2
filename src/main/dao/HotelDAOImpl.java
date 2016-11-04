@@ -27,21 +27,21 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
         return singletonInstance.getCollection();
     }
 
-    public List<Hotel> findHotelByName(String name){
+    public List<Hotel> getHotelByName(String name){
         return getCollection()
                 .stream()
                 .filter(h -> name.equals(h.getName()))
                 .collect(Collectors.toList());
     }
 
-    public List<Hotel> findHotelByCity(String city){
+    public List<Hotel> getHotelByCity(String city){
         return getCollection()
                 .stream()
                 .filter(h -> city.equals(h.getCity()))
                 .collect(Collectors.toList());
     }
 
-    public List<Hotel> findHotelByNameAndCity(String name, String city){
+    public List<Hotel> getHotelByNameAndCity(String name, String city){
         return getCollection()
                 .stream()
                 .filter(h -> name.equals(h.getName()) && city.equals(h.getCity()))
