@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 public class RoomDAOImpl extends AbstractDAOImpl<Room> {
 
     private static RoomDAOImpl singletonInstance;
-    private static Collection<Room> rooms;
 
     private RoomDAOImpl(){}
 
@@ -30,7 +29,7 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
 
     public static Collection<Room> getRoomByPrice(double price){
         Collection<Room> result;
-        result = rooms
+        result = getRooms()
                 .stream()
                 .filter(room -> room.getPrice() == price)
                 .collect(Collectors.toSet());
@@ -39,7 +38,7 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
 
     public static Collection<Room> getRoomByPersons(double persons){
         Collection<Room> result;
-        result = rooms
+        result = getRooms()
                 .stream()
                 .filter(room -> room.getPersons() == persons)
                 .collect(Collectors.toSet());
@@ -48,16 +47,16 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
 
     public static Collection<Room> getRoomByHotelId(double hotelId){
         Collection<Room> result;
-        result=rooms
+        result = getRooms()
                 .stream()
                 .filter(room -> room.getHotelId() == hotelId)
                 .collect(Collectors.toSet());
         return result;
     }
 
-    public static Collection<Room> getRoomByRoomlId(double roomId){
+    public static Collection<Room> getRoomByRoomId(double roomId){
         Collection<Room> result;
-        result=rooms
+        result = getRooms()
                 .stream()
                 .filter(room -> room.getId() == roomId)
                 .collect(Collectors.toSet());

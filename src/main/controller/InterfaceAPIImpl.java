@@ -193,7 +193,7 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
         //check on roomid
         if (params.containsKey("room") || params.containsKey("roomId")) {
-                result.addAll(roomDAOImpl.getRoomByRoomlId(valueOf(params.get("room"))));
+                result.addAll(roomDAOImpl.getRoomByRoomId(valueOf(params.get("room"))));
         }
         //else  System.out.println("Wrong parameter");
 
