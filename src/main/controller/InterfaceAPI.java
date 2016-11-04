@@ -1,6 +1,7 @@
 package main.controller;
 
 import main.model.Hotel;
+import main.model.Room;
 
 import java.util.Collection;
 import java.util.Map;
@@ -15,5 +16,5 @@ public interface InterfaceAPI {
 
     void cancelReservation(long roomId, long userId, long hotelId);
 
-    Collection<Hotel> findRoom(Map<String, String> params);
+    Collection<Room> findRoom(Map<String, String> params);
 }

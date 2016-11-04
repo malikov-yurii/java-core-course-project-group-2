@@ -8,10 +8,11 @@ import main.dao.RoomDAOImpl;
 import main.dao.UserDAOImpl;
 import main.model.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.lang.Integer.valueOf;
 
 /**
  * Created by Mykhailo Senchuk on 11/2/2016.
@@ -160,11 +161,26 @@ public class InterfaceAPIImpl implements InterfaceAPI{
         System.out.println("reservation is canceled");
     }
 
-    //TODO
-    @Override
-    public Collection<Hotel> findRoom(Map<String, String> params) {
 
-        return null;
+    // receive Map with key - parameter name, value - parameter value
+    //
+    // need to receive all parameters: price, persons, hotelId
+    @Override
+    public Collection<Room> findRoom(Map<String, String> params) {
+        Collection<Room> result;
+
+        // TODO situations with wrong values
+
+        double price = Double.parseDouble(params.get("price") );
+        int persons = valueOf(params.get("persons") );
+        int hotelId = valueOf(params.get("hotelId") );
+
+        // TODO situations with not all parameters
+        return result = rooms
+              .stream()
+              .filter(room -> room.getPrice() == price && room.getHotelId() == hotelId && room.getPersons() == persons)
+              .collect(Collectors.toSet());
+
     }
 
     //get data from database
