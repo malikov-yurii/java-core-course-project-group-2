@@ -14,6 +14,7 @@ public class User extends NamedEntity {
         return "User{" +
                 "Name='" + getName() + '\'' +
                 ", password='" + password + '\'' +
+                ", id='" + getId() + '\'' +
                 '}';
     }
 
