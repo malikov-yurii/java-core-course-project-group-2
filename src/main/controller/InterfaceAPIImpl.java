@@ -177,16 +177,60 @@ public class InterfaceAPIImpl implements InterfaceAPI{
 
         // TODO situations with wrong values
 
-        double price = Double.parseDouble(params.get("price") );
-        int persons = valueOf(params.get("persons") );
-        int hotelId = valueOf(params.get("hotelId") );
+        //check on price
+        if (params.containsKey("price")){
+            double price = Double.parseDouble(params.get("price") );
+            result = rooms
+                    .stream()
+                    .filter(room -> room.getPrice() == price)
+                    .collect(Collectors.toSet());
+            return result;
+        }
 
+        //check on persons
+        else if (params.containsKey("persons")){
+            int persons = valueOf(params.get("persons") );
+            result = rooms
+                    .stream()
+                    .filter(room ->room.getPersons() == persons)
+                    .collect(Collectors.toSet());
+            return result;
+        }
+
+        //check on hotelid
+        else if (params.containsKey("hotel")){
+            int hotelId = valueOf(params.get("hotel") );
+            result = rooms
+                    .stream()
+                    .filter(room ->room.getHotelId() == hotelId)
+                    .collect(Collectors.toSet());
+            return result;
+
+        }
+
+        //check on roomid
+        else if (params.containsKey("room")){
+            int roomId = valueOf(params.get("room") );
+            result = rooms
+                    .stream()
+                    .filter(room ->room.getId() == roomId)
+                    .collect(Collectors.toSet());
+            return result;
+
+        }
+
+        else {System.out.println("Wrong parameter");
+        return null;}
+
+
+/*
+  .filter(room ->room.getId() == hotelId)
         // TODO situations with not all parameters
         return result = rooms
               .stream()
               .filter(room -> room.getPrice() == price && room.getHotelId() == hotelId && room.getPersons() == persons)
               .collect(Collectors.toSet());
-
+*/
     }
 
     //get data from database

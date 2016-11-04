@@ -39,10 +39,10 @@ public class Main {
 */
         //-----------------Start Authorization--------------------------------
         InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
-        System.out.print("Введите имя пользователя без пробелов(иначе будет взято только первое слово):");
+        System.out.print("Enter username without space: ");
         Scanner scanner = new Scanner(System.in);
         String readUser = scanner.next();
-        System.out.print("Введите пароль:");
+        System.out.print("Enter password: ");
         String readPassword = scanner.next();
         interfaceAPI.registerUser(new User(readUser, readPassword));
         //scanner.close(); /*Вызывает закрытие потока ввода данных. Подходит для теста, но не для прода*/
@@ -50,11 +50,9 @@ public class Main {
         //-----------------------Finish Authorization------------------------
 
         String choice1 = "";
-        //InterfaceAPIImpl interfaceAPI = new InterfaceAPIImpl();
-
 
         while (!choice1.equalsIgnoreCase("0")){
-            System.out.println("\n---------Menu---------\n\n1. Find hotel by name\n2. Find hotel by city\n3. Book room\n4. Cancel reservation\n5. Find room by params.\n0. Quit.\n");
+            System.out.println("\n---------Menu---------\n\n1. Find hotel by name\n2. Find hotel by city\n3. Book room\n4. Cancel reservation\n5. Find room by parameters\n6. Show user's reservation\n0. Quit\n");
             choice1 = br.readLine();
 
             switch(choice1){
@@ -77,31 +75,41 @@ public class Main {
                 }
                 case "3":
                 {
-                    MethodsForMain.clrscr();                    //book room
-                    //MethodsForMain.PrintFreeRooms();  //print available rooms
-                    interfaceAPI.bookRoom(MethodsForMain.RoomId(br), MethodsForMain.UserId(br), MethodsForMain.HotelId(br));
+                   // MethodsForMain.clrscr();                    //book room
+                    User currentUser = CurrentUser.getCurrentUser();
+                    MethodsForMain.PrintFreeRooms();  //print available rooms
+                    interfaceAPI.bookRoom(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));
                     break;
 
 
                 }
                 case "4":
                 {
-                    MethodsForMain.clrscr();                //cancel reserv
-                    //MethodsForMain.PrintUserRooms(); //print rooms of current user
-                    interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), MethodsForMain.UserId(br), MethodsForMain.HotelId(br));
+                    //MethodsForMain.clrscr();                //cancel reserv
+                   // MethodsForMain.PrintUserRooms(); //print rooms of current user
+                    if (MethodsForMain.CheckUserReserv())
+                    {
+                    User currentUser = CurrentUser.getCurrentUser();
+                    interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));}
+                    else System.out.println("You don't have any reservation.");
                     break;
                 }
                 case "5":
                 {
-                    Map<String, String> map = new HashMap<>();      //find room by params
-
-                    //interfaceAPI.findRoom();
+                   // MethodsForMain.clrscr();
+                    System.out.println(interfaceAPI.findRoom(MethodsForMain.Parameters(br)));//find room by params
                     break;
                 }
                 case "0":
                 {
                     //MethodsForMain.clrscr();
                     System.out.println("Good Bye!");            //exit
+                    break;
+                }
+                case "6":
+                {
+                    // MethodsForMain.clrscr();
+                    MethodsForMain.PrintUserRooms(); //print rooms of current user
                     break;
                 }
                 default:
