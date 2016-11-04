@@ -47,7 +47,7 @@ public class MethodsForMain {
 
     public final static Map<String, String> Parameters(BufferedReader br) throws IOException {
         Map<String, String> map = new HashMap<>();
-        System.out.println("Enter parameter's name for searching room: ");
+        System.out.println("Enter parameter's name for searching room (price, persons, id): ");
         String key = br.readLine();   // key - parameter name, value - parameter value
         if (key.equalsIgnoreCase("id"))
         {
