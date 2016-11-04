@@ -47,8 +47,10 @@ public class MethodsForMain {
 
     public final static Map<String, String> Parameters(BufferedReader br) throws IOException {
         Map<String, String> map = new HashMap<>();
+        String choice = "";
+        while(!choice.equalsIgnoreCase("no")){
         System.out.println("Enter parameter's name for searching room (price, persons, id): ");
-        String key = br.readLine();   // key - parameter name, value - parameter value
+            String key = br.readLine();   // key - parameter name, value - parameter value
         if (key.equalsIgnoreCase("id"))
         {
             System.out.println("You want ID of hotel or ID of room?");
@@ -57,6 +59,9 @@ public class MethodsForMain {
         System.out.println("Enter parameter's value for searching room: ");
         String value = br.readLine();
         map.put(key, value);
+            System.out.println("Dou want enter more parameters?\nyes/no");
+            choice = br.readLine();
+        }
         return map;
     }
 
