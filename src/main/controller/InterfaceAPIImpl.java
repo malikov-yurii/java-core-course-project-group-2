@@ -11,7 +11,6 @@ import main.model.User;
 
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
@@ -33,9 +32,9 @@ import java.util.stream.Collectors;
  * public Collection<room> findRoom(Map<String, String> params)
  *
  *  supporting methods:
- *  public Room searchRoom(long roomId, long hotelId)
- *  public User searchUser(long userId)
- *  public boolean validateRoom(Room room, User user)
+ *  private Room searchRoom(long roomId, long hotelId)
+ *  private User searchUser(long userId)
+ *  private boolean validateRoom(Room room, User user)
  *
  *
  *
@@ -64,7 +63,8 @@ public class InterfaceAPIImpl implements InterfaceAPI {
         return hotelDAOImpl.getHotelByCity(city);
     }
 
-    public Room searchRoom(long roomId, long hotelId) {
+    //Find room by id and hotel id, used by bookRoom, cancelReservation
+    private Room findRoom(long roomId, long hotelId) {
         try {
             return RoomDAOImpl.getRooms()
                     .stream()
@@ -77,7 +77,8 @@ public class InterfaceAPIImpl implements InterfaceAPI {
             return null;
         }
     }
-    public User searchUser(long userId) {
+    //Find user by id, used by bookRoom, cancelReservation
+    private User findUser(long userId) {
         try {
             return UserDAOImpl.getUsers()
                     .stream()
@@ -90,18 +91,10 @@ public class InterfaceAPIImpl implements InterfaceAPI {
             return null;
         }
     }
+    //checks if room and user were found, used by bookRoom, cancelReservation
+    private boolean validateRoom(Room room, User user){
 
-    public boolean validateRoom(Room room, User user){
-        //break method if room is reserved
-        if (room == null) {
-            return false;
-        }
-
-        //break method if user wasn't found
-        if (user == null) {
-            return false;
-        }
-        return true;
+        return user != null && room != null;
     }
 
     //searches for Room with given parameters and set isReserved in Room for true
@@ -109,10 +102,10 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     public void bookRoom(long roomId, long userId, long hotelId) {
 
         //search room and user
-        Room room = null;
-        room = searchRoom(roomId,hotelId);
-        User user = null;
-        user = searchUser(userId);
+        Room room;
+        room = findRoom(roomId,hotelId);
+        User user;
+        user = findUser(userId);
 
         //break method if room or user wasn't found
         if(!validateRoom(room,user)) return;
@@ -134,10 +127,10 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     @Override
     public void cancelReservation(long roomId, long userId, long hotelId) {
         //search room and user
-        Room room = null;
-        room = searchRoom(roomId,hotelId);
-        User user = null;
-        user = searchUser(userId);
+        Room room;
+        room = findRoom(roomId,hotelId);
+        User user;
+        user = findUser(userId);
 
         //break method if room isn't valid
         if (!validateRoom(room,user)) {
@@ -154,27 +147,24 @@ public class InterfaceAPIImpl implements InterfaceAPI {
 
     // one of possible realization
     public Collection<Room> findRoom(Map<String, String> params) {
-        Predicate<Room> testByParams = new Predicate<Room>() {
-            @Override
-            public boolean test(Room room) {
-                if (params.containsKey("price") &&
-                        Double.parseDouble(params.get("price")) != room.getPrice()) {
-                    return false;
-                }
-                if (params.containsKey("persons") &&
-                        Integer.parseInt(params.get("persons")) != room.getPersons()) {
-                    return false;
-                }
-                if (params.containsKey("hotelId") &&
-                        Long.parseLong(params.get("hotelId")) != room.getHotelId()) {
-                    return false;
-                }
-                if (params.containsKey("roomId") &&
-                        Long.parseLong(params.get("roomId")) != room.getId()) {
-                    return false;
-                }
-                return true;
+        Predicate<Room> testByParams = room -> {
+            if (params.containsKey("price") &&
+                    Double.parseDouble(params.get("price")) != room.getPrice()) {
+                return false;
             }
+            if (params.containsKey("persons") &&
+                    Integer.parseInt(params.get("persons")) != room.getPersons()) {
+                return false;
+            }
+            if (params.containsKey("hotelId") &&
+                    Long.parseLong(params.get("hotelId")) != room.getHotelId()) {
+                return false;
+            }
+            if (params.containsKey("roomId") &&
+                    Long.parseLong(params.get("roomId")) != room.getId()) {
+                return false;
+            }
+            return true;
         };
         return roomDAOImpl.getRooms()
                 .stream()
