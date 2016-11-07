@@ -144,6 +144,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
 
     // one of possible realization
     public Collection<Room> findRoom(Map<String, String> params) {
+        
         Predicate<Room> testByParams = room -> {
             if (params.containsKey("price") &&
                     Double.parseDouble(params.get("price")) != room.getPrice()) {
@@ -163,6 +164,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
             }
             return true;
         };
+
         return roomDAOImpl.getList()
                 .stream()
                 .filter(testByParams)

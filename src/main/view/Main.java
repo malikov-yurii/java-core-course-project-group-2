@@ -4,11 +4,13 @@ import main.controller.InterfaceAPIImpl;
 import main.dao.RoomDAOImpl;
 import main.datasourse.TestData;
 import main.model.CurrentUser;
+import main.model.Room;
 import main.model.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -97,8 +99,13 @@ public class Main {
                 case "5":
                 {
                    // MethodsForMain.clrscr();
-                    System.out.println(interfaceAPI.findRoom(MethodsForMain.Parameters(br)));//find room by params
-                    break;
+                    try {
+                        Collection<Room> roomsFoundByParams = interfaceAPI.findRoom(MethodsForMain.Parameters(br));
+                        System.out.println((roomsFoundByParams.size() != 0) ? roomsFoundByParams : "We don't find any matches for these parameters");
+                    }catch(NumberFormatException e){
+                        System.out.println("Parser error! Wrong format! Need number!");
+                    }
+                        break;
                 }
                 case "0":
                 {

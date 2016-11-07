@@ -53,7 +53,7 @@ public class MethodsForMain {
             String key = br.readLine();   // key - parameter name, value - parameter value
         if (key.equalsIgnoreCase("id"))
         {
-            System.out.println("You want ID of hotel or ID of room?");
+            System.out.println("You want ID of hotel(use 'hotelId' string) or ID of room(use 'roomId' string)?");
             key=br.readLine();
         }
         System.out.println("Enter parameter's value for searching room: ");
