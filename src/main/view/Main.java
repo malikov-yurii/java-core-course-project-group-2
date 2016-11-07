@@ -86,7 +86,7 @@ public class Main {
                 case "4":
                 {
                     //MethodsForMain.clrscr();                //cancel reserv
-                   // MethodsForMain.PrintUserRooms(); //print rooms of current user
+                    MethodsForMain.PrintUserRooms(); //print rooms of current user
                     if (MethodsForMain.CheckUserReserv())
                     {
                     User currentUser = CurrentUser.getCurrentUser();
