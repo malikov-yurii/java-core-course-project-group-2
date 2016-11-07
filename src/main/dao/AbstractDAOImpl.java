@@ -51,7 +51,7 @@ public abstract class AbstractDAOImpl<T extends AbstractEntity>  implements Abst
     @Override
     public boolean deleteAll(Collection<T> collection) {
         if (collection != null) {
-            collection.removeAll(collection);
+            this.collection.removeAll(collection);
             return true;
         }
         return false;
