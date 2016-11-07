@@ -9,7 +9,6 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
     private static UserDAOImpl singletonInstance;
 
     private UserDAOImpl(){
-
     }
 
     public static void initialize(Collection<User> collection){

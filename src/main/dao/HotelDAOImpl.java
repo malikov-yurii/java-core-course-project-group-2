@@ -10,7 +10,8 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
 
     private static HotelDAOImpl singletonInstance;
 
-    private HotelDAOImpl(){}
+    private HotelDAOImpl(){
+    }
 
     public static void initialize(Collection<Hotel> collection){
         if (singletonInstance == null) {

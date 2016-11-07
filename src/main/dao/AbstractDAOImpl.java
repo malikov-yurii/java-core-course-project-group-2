@@ -35,8 +35,9 @@ public abstract class AbstractDAOImpl<T extends AbstractEntity>  implements Abst
         return false;
     }
 
-    public List<T> getList() {
-        return new ArrayList<T>(collection);
+    @Override
+    public Set<T> getList() {
+        return new HashSet<T>(collection);
     }
 
     @Override
