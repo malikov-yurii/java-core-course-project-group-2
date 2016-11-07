@@ -70,7 +70,7 @@ public class MethodsForMain {
         boolean anyReserved = false;
 
         System.out.println("Available rooms:");
-        Collection<Room> rooms = RoomDAOImpl.getRooms();
+        Collection<Room> rooms = RoomDAOImpl.getInstance().getList();
         for (Room room:rooms) {
             if(!room.isReserved()){
                 anyReserved = true;
@@ -88,7 +88,7 @@ public class MethodsForMain {
         boolean anyReserved = false;
 
         User currentUser = CurrentUser.getCurrentUser();
-        Collection<Room> rooms = RoomDAOImpl.getRooms();
+        Collection<Room> rooms = RoomDAOImpl.getInstance().getList();
         System.out.println("Rooms reserved by " + currentUser.getName() + ":");
 
         for (Room room:rooms) {
@@ -107,7 +107,7 @@ public class MethodsForMain {
     public final static boolean CheckUserReserv() throws IOException {
         boolean anyReserved = false;
         User currentUser = CurrentUser.getCurrentUser();
-        Collection<Room> rooms = RoomDAOImpl.getRooms();
+        Collection<Room> rooms = RoomDAOImpl.getInstance().getList();
 
         for (Room room:rooms) {
             if (currentUser.equals(room.getUserReserved()))
