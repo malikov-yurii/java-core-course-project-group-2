@@ -9,8 +9,7 @@ public interface AbstractDAO<T extends AbstractEntity> {
     boolean delete(T object);
     boolean deleteAll(Collection<T> collection);
     boolean saveAll(Collection<T> collection);
-    Collection<T> getCollection();
-    boolean setCollection(Collection<T> collection);
+    Collection<T> getList();
     boolean deleteById(long id);
     T get(long id);
 }

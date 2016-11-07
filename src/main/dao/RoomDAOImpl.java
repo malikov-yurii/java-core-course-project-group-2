@@ -10,56 +10,45 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
 
     private static RoomDAOImpl singletonInstance;
 
-    private RoomDAOImpl(){}
+    private RoomDAOImpl() {
+    }
 
     public static void initialize(Collection<Room> collection){
         if (singletonInstance == null) {
             singletonInstance = new RoomDAOImpl();
-            singletonInstance.setCollection(collection);
+            singletonInstance.saveAll(collection);
         }
     }
 
-    public static RoomDAOImpl getInstance(){
+    public static RoomDAOImpl getInstance() {
         return singletonInstance;
     }
 
-    public static Collection<Room> getRooms() {
-        return singletonInstance.getCollection();
-    }
-
-    public static Collection<Room> getRoomByPrice(double price){
-        Collection<Room> result;
-        result = getRooms()
+    public Set<Room> getRoomByPrice(double price) {
+        return getList()
                 .stream()
                 .filter(room -> room.getPrice() == price)
                 .collect(Collectors.toSet());
-        return result;
     }
 
-    public static Collection<Room> getRoomByPersons(double persons){
-        Collection<Room> result;
-        result = getRooms()
+    public Set<Room> getRoomByPersons(double persons) {
+        return getList()
                 .stream()
                 .filter(room -> room.getPersons() == persons)
                 .collect(Collectors.toSet());
-        return result;
     }
 
-    public static Collection<Room> getRoomByHotelId(double hotelId){
-        Collection<Room> result;
-        result = getRooms()
+    public Set<Room> getRoomByHotelId(double hotelId) {
+        return getList()
                 .stream()
                 .filter(room -> room.getHotelId() == hotelId)
                 .collect(Collectors.toSet());
-        return result;
     }
 
-    public static Collection<Room> getRoomByRoomId(double roomId){
-        Collection<Room> result;
-        result = getRooms()
+    public Set<Room> getRoomByRoomId(double roomId) {
+        return getList()
                 .stream()
                 .filter(room -> room.getId() == roomId)
                 .collect(Collectors.toSet());
-        return result;
     }
 }

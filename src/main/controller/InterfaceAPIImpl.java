@@ -46,27 +46,24 @@ public class InterfaceAPIImpl implements InterfaceAPI {
 
     private RoomDAOImpl roomDAOImpl = RoomDAOImpl.getInstance();
     private HotelDAOImpl hotelDAOImpl = HotelDAOImpl.getInstance();
-
+    private UserDAOImpl userDAOImpl = UserDAOImpl.getInstance();
 
     //receive hotel name, return collection of hotels with that name
     @Override
     public Collection<Hotel> findHotelbyName(String name) {
-
         return hotelDAOImpl.getHotelByName(name);
-
     }
 
     //receive city name, return collection of hotels in the city
     @Override
     public Collection<Hotel> findHotelbyCity(String city) {
-
         return hotelDAOImpl.getHotelByCity(city);
     }
 
     //Find room by id and hotel id, used by bookRoom, cancelReservation
     private Room findRoom(long roomId, long hotelId) {
         try {
-            return RoomDAOImpl.getRooms()
+            return roomDAOImpl.getList()
                     .stream()
                     .filter(room -> room.getId() == roomId && room.getHotelId() == hotelId)
                     .findFirst()
@@ -80,7 +77,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     //Find user by id, used by bookRoom, cancelReservation
     private User findUser(long userId) {
         try {
-            return UserDAOImpl.getUsers()
+            return userDAOImpl.getList()
                     .stream()
                     .filter(user -> user.getId() == userId)
                     .findFirst()
@@ -166,7 +163,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
             }
             return true;
         };
-        return roomDAOImpl.getRooms()
+        return roomDAOImpl.getList()
                 .stream()
                 .filter(testByParams)
                 .collect(Collectors.toSet());

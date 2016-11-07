@@ -10,12 +10,13 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
 
     private static HotelDAOImpl singletonInstance;
 
-    private HotelDAOImpl(){}
+    private HotelDAOImpl(){
+    }
 
     public static void initialize(Collection<Hotel> collection){
         if (singletonInstance == null) {
             singletonInstance = new HotelDAOImpl();
-            singletonInstance.setCollection(collection);
+            singletonInstance.saveAll(collection);
         }
     }
 
@@ -23,26 +24,22 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> {
         return singletonInstance;
     }
 
-    public static Collection<Hotel> getHotels() {
-        return singletonInstance.getCollection();
-    }
-
     public Set<Hotel> getHotelByName(String name){
-        return getCollection()
+        return getList()
                 .stream()
                 .filter(h -> name.equals(h.getName()))
                 .collect(Collectors.toSet());
     }
 
     public Set<Hotel> getHotelByCity(String city){
-        return getCollection()
+        return getList()
                 .stream()
                 .filter(h -> city.equals(h.getCity()))
                 .collect(Collectors.toSet());
     }
 
     public Set<Hotel> getHotelByNameAndCity(String name, String city){
-        return getCollection()
+        return getList()
                 .stream()
                 .filter(h -> name.equals(h.getName()) && city.equals(h.getCity()))
                 .collect(Collectors.toSet());
