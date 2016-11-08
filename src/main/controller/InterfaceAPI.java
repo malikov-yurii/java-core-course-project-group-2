@@ -12,9 +12,27 @@ public interface InterfaceAPI {
 
     Collection<Hotel> findHotelbyCity(String city);
 
-    void bookRoom(long roomId, long userId, long hotelId);
+    void bookRoom(long roomId, long userId, long hotelId)  throws AlreadyReservedException, NotFoundException ;
 
-    void cancelReservation(long roomId, long userId, long hotelId);
+    void cancelReservation(long roomId, long userId, long hotelId)throws AuthorisationException, AlreadyReservedException, NotFoundException;
 
     Collection<Room> findRoom(Map<String, String> params);
+
+    public class AlreadyReservedException extends Exception {
+        public AlreadyReservedException(String message){
+            super(message);
+        }
+    }
+    public class AuthorisationException extends Exception {
+        public AuthorisationException(String message){
+            super(message);
+        }
+    }
+
+    public class NotFoundException extends Exception {
+        public NotFoundException(String message){
+            super(message);
+        }
+    }
+
 }

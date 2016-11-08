@@ -1,5 +1,6 @@
 package main.view;
 
+import main.controller.InterfaceAPI;
 import main.controller.InterfaceAPIImpl;
 import main.dao.RoomDAOImpl;
 import main.datasourse.TestData;
@@ -80,7 +81,15 @@ public class Main {
                    // MethodsForMain.clrscr();                    //book room
                     User currentUser = CurrentUser.getCurrentUser();
                     MethodsForMain.PrintFreeRooms();  //print available rooms
-                    interfaceAPI.bookRoom(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));
+                    try {
+                        interfaceAPI.bookRoom(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));
+                    }
+                    catch (InterfaceAPI.NotFoundException e){
+                        System.out.println(e);
+                    }
+                    catch(InterfaceAPI.AlreadyReservedException e){
+                        System.out.println(e);
+                    }
                     break;
 
 
@@ -89,10 +98,16 @@ public class Main {
                 {
                     //MethodsForMain.clrscr();                //cancel reserv
                     MethodsForMain.PrintUserRooms(); //print rooms of current user
-                    if (MethodsForMain.CheckUserReserv())
-                    {
-                    User currentUser = CurrentUser.getCurrentUser();
-                    interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));}
+                    if (MethodsForMain.CheckUserReserv()) {
+                        User currentUser = CurrentUser.getCurrentUser();
+                        try {
+                            interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));
+                        } catch (InterfaceAPI.NotFoundException e) {
+                            System.out.println(e);
+                        } catch (InterfaceAPI.AuthorisationException e) {
+                            System.out.println(e);
+                        }
+                    }
                     else System.out.println("You don't have any reservation.");
                     break;
                 }
