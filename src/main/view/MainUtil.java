@@ -66,7 +66,7 @@ public class MainUtil {
     }
 
     // prints rooms from db, return false if there are no free rooms
-    public final static boolean printFreeRooms() throws IOException {
+    public final static boolean printFreeRooms() {
         boolean anyReserved = false;
 
         System.out.println("Available rooms:");
@@ -84,7 +84,7 @@ public class MainUtil {
     }
 
     //prints rooms reserved by CurrentUser, return false if there are no rooms reserved
-    public final static boolean printUserRooms() throws IOException {
+    public final static boolean printUserRooms() {
         boolean anyReserved = false;
 
         User currentUser = CurrentUser.getCurrentUser();
@@ -104,7 +104,7 @@ public class MainUtil {
         return anyReserved;
     }
 
-    public final static boolean checkUserReserv() throws IOException {
+    public final static boolean checkUserReserv() {
         boolean anyReserved = false;
         User currentUser = CurrentUser.getCurrentUser();
         Collection<Room> rooms = RoomDAOImpl.getInstance().getList();
