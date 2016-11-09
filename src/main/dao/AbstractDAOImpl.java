@@ -4,14 +4,14 @@ import main.model.AbstractEntity;
 
 import java.util.*;
 
-public abstract class AbstractDAOImpl<T extends AbstractEntity>  implements AbstractDAO<T> {
+abstract class AbstractDAOImpl<T extends AbstractEntity> implements AbstractDAO<T> {
 
     private Collection<T> collection = new HashSet<T>();
 
     @Override
     public T get(long id) {
-        for (T item : collection){
-            if (item.getId() == id){
+        for (T item : collection) {
+            if (item.getId() == id) {
                 return item;
             }
         }
@@ -61,8 +61,8 @@ public abstract class AbstractDAOImpl<T extends AbstractEntity>  implements Abst
     @Override
     public boolean deleteById(long id) {
         Iterator<T> iterator = collection.iterator();
-        while (iterator.hasNext()){
-            if (iterator.next().getId() == id){
+        while (iterator.hasNext()) {
+            if (iterator.next().getId() == id) {
                 iterator.remove();
                 return true;
             }

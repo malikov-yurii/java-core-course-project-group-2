@@ -13,8 +13,8 @@ public class Hotel extends NamedEntity {
     public String toString() {
         return "Hotel{" +
                 "name='" + getName() + '\'' +
-                "city='" + city + '\'' +
-                "id='" + getId() + '\'' +
+                ", city='" + city + '\'' +
+                ", id='" + getId() + '\'' +
                 '}';
     }
 

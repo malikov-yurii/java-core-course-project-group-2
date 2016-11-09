@@ -6,7 +6,7 @@ public abstract class AbstractEntity {
 
     private long id;
 
-    public AbstractEntity() {
+    AbstractEntity() {
         this.id = idSequence++;
     }
 

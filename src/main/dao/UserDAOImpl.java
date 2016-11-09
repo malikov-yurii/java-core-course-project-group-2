@@ -8,17 +8,25 @@ public class UserDAOImpl extends AbstractDAOImpl<User> {
 
     private static UserDAOImpl singletonInstance;
 
-    private UserDAOImpl(){
+    private UserDAOImpl() {
     }
 
-    public static void initialize(Collection<User> collection){
+    public static void initialize(Collection<User> collection) {
         if (singletonInstance == null) {
             singletonInstance = new UserDAOImpl();
             singletonInstance.saveAll(collection);
         }
     }
 
-    public static UserDAOImpl getInstance(){
+    public static UserDAOImpl getInstance() {
         return singletonInstance;
+    }
+
+    public User getUserById(long userId){
+        return getList()
+                .stream()
+                .filter(user -> user.getId() == userId)
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -8,26 +8,25 @@ import java.util.Map;
 
 public interface InterfaceAPI {
 
-    Collection<Hotel> findHotelbyName(String name);
+    Collection<Hotel> findHotelByName(String name);
 
-    Collection<Hotel> findHotelbyCity(String city);
+    Collection<Hotel> findHotelByCity(String city);
 
-    void bookRoom(long roomId, long userId, long hotelId)  throws NotFoundException ;
+    void bookRoom(long roomId, long userId, long hotelId) throws NotFoundException;
 
-    void cancelReservation(long roomId, long userId, long hotelId)throws AuthorisationException, NotFoundException;
+    void cancelReservation(long roomId, long userId, long hotelId) throws AuthorisationException, NotFoundException;
 
     Collection<Room> findRoom(Map<String, String> params);
 
-    public class AuthorisationException extends Exception {
-        public AuthorisationException(String message){
+    class AuthorisationException extends Exception {
+        AuthorisationException(String message) {
             super(message);
         }
     }
 
-    public class NotFoundException extends Exception {
-        public NotFoundException(String message){
+    class NotFoundException extends Exception {
+        NotFoundException(String message) {
             super(message);
         }
     }
-
 }

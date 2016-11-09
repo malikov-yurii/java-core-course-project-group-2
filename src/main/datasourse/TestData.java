@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class TestData {
-    public final static Hotel HOTEL_DRUGHBA_KIEV      = new Hotel("Drughba", "Kiev");
-    public final static Hotel HOTEL_UKRAINA_KIEV      = new Hotel("Ukraina", "Kiev");
-    public final static Hotel HOTEL_OPTIMA_CHERKASSY  = new Hotel("Optima", "Cherkassy");
+    public final static Hotel HOTEL_DRUGHBA_KIEV = new Hotel("Drughba", "Kiev");
+    public final static Hotel HOTEL_UKRAINA_KIEV = new Hotel("Ukraina", "Kiev");
+    public final static Hotel HOTEL_OPTIMA_CHERKASSY = new Hotel("Optima", "Cherkassy");
     public final static Hotel HOTEL_APELSIN_CHERKASSY = new Hotel("Apelsin", "Cherkassy");
-    public final static Hotel HOTEL_DNESTR_LVIV       = new Hotel("Dnestr", "Lviv");
-    public final static Hotel HOTEL_GETMAN_LVIV       = new Hotel("Getman", "Lviv");
+    public final static Hotel HOTEL_DNESTR_LVIV = new Hotel("Dnestr", "Lviv");
+    public final static Hotel HOTEL_GETMAN_LVIV = new Hotel("Getman", "Lviv");
 
     public static final Room ROOM0_UKRAINA = new Room(200.50, 2, null, false, HOTEL_UKRAINA_KIEV.getId());
     public static final Room ROOM1_UKRAINA = new Room(220.50, 1, null, false, HOTEL_UKRAINA_KIEV.getId());
@@ -82,7 +82,7 @@ public class TestData {
     public static final Room ROOM8_GETMAN = new Room(290.50, 2, null, false, HOTEL_GETMAN_LVIV.getId());
     public static final Room ROOM9_GETMAN = new Room(300.50, 1, null, false, HOTEL_GETMAN_LVIV.getId());
 
-    public static void initializeDAOWithTestData(){
+    public static void initializeDAOWithTestData() {
         HotelDAOImpl.initialize(new HashSet<>(Arrays.asList(
                 HOTEL_DRUGHBA_KIEV, HOTEL_UKRAINA_KIEV, HOTEL_OPTIMA_CHERKASSY,
                 HOTEL_APELSIN_CHERKASSY, HOTEL_DNESTR_LVIV, HOTEL_GETMAN_LVIV

@@ -3,7 +3,8 @@ package main.dao;
 import main.model.Room;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class RoomDAOImpl extends AbstractDAOImpl<Room> {
@@ -13,7 +14,7 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
     private RoomDAOImpl() {
     }
 
-    public static void initialize(Collection<Room> collection){
+    public static void initialize(Collection<Room> collection) {
         if (singletonInstance == null) {
             singletonInstance = new RoomDAOImpl();
             singletonInstance.saveAll(collection);
@@ -24,31 +25,26 @@ public class RoomDAOImpl extends AbstractDAOImpl<Room> {
         return singletonInstance;
     }
 
-    public Set<Room> getRoomByPrice(double price) {
+    public Room getRoomByRoomIdAndHotelId(long roomId, long hotelId) {
         return getList()
                 .stream()
-                .filter(room -> room.getPrice() == price)
-                .collect(Collectors.toSet());
+                .filter(room -> room.getId() == roomId && room.getHotelId() == hotelId)
+                .findFirst()
+                .orElse(null);
     }
 
-    public Set<Room> getRoomByPersons(double persons) {
+    public Collection<Room> getRoomByParams(Map<String, String> params) throws NumberFormatException {
+        Predicate<Room> testByParams = room -> !(params.containsKey("price")
+                && Double.parseDouble(params.get("price")) != room.getPrice())
+                && !(params.containsKey("persons")
+                && Integer.parseInt(params.get("persons")) != room.getPersons())
+                && !(params.containsKey("hotelId")
+                && Long.parseLong(params.get("hotelId")) != room.getHotelId())
+                && !(params.containsKey("roomId")
+                && Long.parseLong(params.get("roomId")) != room.getId());
         return getList()
                 .stream()
-                .filter(room -> room.getPersons() == persons)
-                .collect(Collectors.toSet());
-    }
-
-    public Set<Room> getRoomByHotelId(double hotelId) {
-        return getList()
-                .stream()
-                .filter(room -> room.getHotelId() == hotelId)
-                .collect(Collectors.toSet());
-    }
-
-    public Set<Room> getRoomByRoomId(double roomId) {
-        return getList()
-                .stream()
-                .filter(room -> room.getId() == roomId)
+                .filter(testByParams)
                 .collect(Collectors.toSet());
     }
 }

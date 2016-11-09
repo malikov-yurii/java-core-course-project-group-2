@@ -1,9 +1,9 @@
 package main.model;
 
-public abstract class NamedEntity extends AbstractEntity {
+abstract class NamedEntity extends AbstractEntity {
     private String name;
 
-    public NamedEntity(String name) {
+    NamedEntity(String name) {
         this.name = name;
     }
 

@@ -13,7 +13,6 @@ public class User extends NamedEntity {
     public String toString() {
         return "User{" +
                 "Name='" + getName() + '\'' +
-                ", password='" + password + '\'' +
                 ", id='" + getId() + '\'' +
                 '}';
     }
@@ -25,8 +24,7 @@ public class User extends NamedEntity {
 
         User user = (User) o;
 
-        if (!password.equals(user.password)) return false;
-        return getName().equals(user.getName());
+        return password.equals(user.password) && getName().equals(user.getName());
     }
 
     @Override
