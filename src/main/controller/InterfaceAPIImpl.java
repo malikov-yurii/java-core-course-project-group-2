@@ -34,13 +34,6 @@ import java.util.stream.Collectors;
  *  supporting methods:
  *  private Room searchRoom(long roomId, long hotelId)
  *  private User searchUser(long userId)
- *  private boolean validateRoom(Room room, User user)
- *
- *
- *
- *
- *
- *
  */
 public class InterfaceAPIImpl implements InterfaceAPI {
 
@@ -61,7 +54,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     }
 
     //Find room by id and hotel id, used by bookRoom, cancelReservation
-    private Room findRoom(long roomId, long hotelId) {
+    private Room findRoom(long roomId, long hotelId) throws NotFoundException{
         try {
             return roomDAOImpl.getList()
                     .stream()
@@ -70,12 +63,12 @@ public class InterfaceAPIImpl implements InterfaceAPI {
                     .get();
         }
         catch (NoSuchElementException e){
-            System.out.println("room wasn't found");
-            return null;
+            throw new NotFoundException("room " + roomId+" wasn't found" );
         }
     }
     //Find user by id, used by bookRoom, cancelReservation
-    private User findUser(long userId) {
+    private User findUser(long userId) throws NotFoundException  {
+
         try {
             return userDAOImpl.getList()
                     .stream()
@@ -84,19 +77,13 @@ public class InterfaceAPIImpl implements InterfaceAPI {
                     .get();
         }
         catch (NoSuchElementException e){
-            System.out.println("user wasn't found");
-            return null;
+            throw new NotFoundException("user " + userId+" wasn't found" ) ;
         }
     }
-    //checks if room and user were found, used by bookRoom, cancelReservation
-    private boolean validateRoom(Room room, User user){
-
-        return user != null && room != null;
-    }
-
     //searches for Room with given parameters and set isReserved in Room for true
+
     @Override
-    public void bookRoom(long roomId, long userId, long hotelId) {
+    public void bookRoom(long roomId, long userId, long hotelId) throws NotFoundException   {
 
         //search room and user
         Room room;
@@ -104,12 +91,9 @@ public class InterfaceAPIImpl implements InterfaceAPI {
         User user;
         user = findUser(userId);
 
-        //break method if room or user wasn't found
-        if(!validateRoom(room,user)) return;
-
         //break method if room is already reserved
         if (room.isReserved()) {
-            System.out.println("room is already reserved");
+            System.out.println("Room "+room.getId()+" is already reserved.");
             return;
         }
 
@@ -122,20 +106,20 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     }
     //searches for Room with given parameters and set isReserved in Room for false
     @Override
-    public void cancelReservation(long roomId, long userId, long hotelId) {
+    public void cancelReservation(long roomId, long userId, long hotelId) throws AuthorisationException, NotFoundException {
         //search room and user
         Room room;
         room = findRoom(roomId,hotelId);
         User user;
         user = findUser(userId);
 
-        //break method if room isn't valid
-        if (!validateRoom(room,user)) {
-            return;
-        }
-
         //clear User from Room
-        room.setUserReserved(null);
+        if (user.equals( room.getUserReserved() )) {
+            room.setUserReserved(null);
+        }
+        else
+            throw new AuthorisationException("Not authorised for this action");
+
 
         //set isReserved flag for false
         room.setReserved(false);
