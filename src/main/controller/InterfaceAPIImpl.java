@@ -86,10 +86,8 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     public void bookRoom(long roomId, long userId, long hotelId) throws NotFoundException   {
 
         //search room and user
-        Room room;
-        room = findRoom(roomId,hotelId);
-        User user;
-        user = findUser(userId);
+        Room room = findRoom(roomId,hotelId);
+        User user = findUser(userId);
 
         //break method if room is already reserved
         if (room.isReserved()) {
@@ -108,10 +106,8 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     @Override
     public void cancelReservation(long roomId, long userId, long hotelId) throws AuthorisationException, NotFoundException {
         //search room and user
-        Room room;
-        room = findRoom(roomId,hotelId);
-        User user;
-        user = findUser(userId);
+        Room room = findRoom(roomId,hotelId);
+        User user = findUser(userId);
 
         //clear User from Room
         if (user.equals( room.getUserReserved() )) {
@@ -126,8 +122,9 @@ public class InterfaceAPIImpl implements InterfaceAPI {
         System.out.println("reservation is canceled");
     }
 
-    // one of possible realization
-    public Collection<Room> findRoom(Map<String, String> params) {
+    // searches for rooms with given paramerets, throws NumberFormatException if value format isn't correct
+    // key- parameter name, value - parameter value
+    public Collection<Room> findRoom(Map<String, String> params) throws NumberFormatException {
         
         Predicate<Room> testByParams = room -> {
             if (params.containsKey("price") &&
@@ -162,7 +159,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
         currentUser.setCurrentUser(user);
         System.out.println(user + " is registered...");
 
-        UserDAOImpl.getInstance().save(user);
+        userDAOImpl.save(user);
     }
 
 }
