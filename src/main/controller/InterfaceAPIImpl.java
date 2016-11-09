@@ -51,20 +51,21 @@ public class InterfaceAPIImpl implements InterfaceAPI {
 
     //searches room by id and hotel id, used by bookRoom, cancelReservation
     private Room findRoom(long roomId, long hotelId) throws NotFoundException {
-        try {
-            return roomDAOImpl.getRoomByRoomIdAndHotelId(roomId, hotelId);
-        } catch (NoSuchElementException e) {
-            throw new NotFoundException("room " + roomId + " wasn't found");
+        Room room = roomDAOImpl.getRoomByRoomIdAndHotelId(roomId, hotelId);
+        if(room !=null){
+            return room;
         }
+        else throw new NotFoundException("room " + roomId + " wasn't found");
     }
 
     //searches user by id, used by bookRoom, cancelReservation
     private User findUser(long userId) throws NotFoundException {
-        try {
-            return userDAOImpl.getUserById(userId);
-        } catch (NoSuchElementException e) {
-            throw new NotFoundException("user " + userId + " wasn't found");
+        User user = userDAOImpl.getUserById(userId);
+        if(user != null){
+            return user;
         }
+        else throw new NotFoundException("user " + userId + " wasn't found");
+
     }
 
     //searches for Room with given parameters and set isReserved in Room for true
