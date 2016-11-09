@@ -87,7 +87,10 @@ public class Main {
                                 .stream()
                                 .filter(room -> !room.isReserved())
                                 .collect(Collectors.toSet());
-                        System.out.println((roomsFoundByParams.size() != 0) ? roomsFoundByParams : "There are no matches for given parameters");
+                        if(roomsFoundByParams.size() != 0)
+                            roomsFoundByParams.forEach(System.out::println);
+                        else
+                            System.out.println("There are no matches for given parameters");
                     } catch (NumberFormatException e) {
                         System.out.println("Parser error! Wrong format! Need number!");
                     }
