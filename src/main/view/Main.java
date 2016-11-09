@@ -1,7 +1,7 @@
 package main.view;
 
+import main.controller.InterfaceAPI;
 import main.controller.InterfaceAPIImpl;
-import main.dao.RoomDAOImpl;
 import main.datasourse.TestData;
 import main.model.CurrentUser;
 import main.model.Room;
@@ -11,8 +11,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -79,8 +77,14 @@ public class Main {
                 {
                    // MethodsForMain.clrscr();                    //book room
                     User currentUser = CurrentUser.getCurrentUser();
-                    MethodsForMain.PrintFreeRooms();  //print available rooms
-                    interfaceAPI.bookRoom(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));
+                    MainUtil.printFreeRooms();  //print available rooms
+                    try {
+                        interfaceAPI.bookRoom(MainUtil.roomId(br), currentUser.getId(), MainUtil.hotelId(br));
+                    }
+                    catch (InterfaceAPI.NotFoundException e){
+                        System.out.println(e);
+                    }
+
                     break;
 
 
@@ -88,11 +92,15 @@ public class Main {
                 case "4":
                 {
                     //MethodsForMain.clrscr();                //cancel reserv
-                    MethodsForMain.PrintUserRooms(); //print rooms of current user
-                    if (MethodsForMain.CheckUserReserv())
-                    {
-                    User currentUser = CurrentUser.getCurrentUser();
-                    interfaceAPI.cancelReservation(MethodsForMain.RoomId(br), currentUser.getId(), MethodsForMain.HotelId(br));}
+                    MainUtil.printUserRooms(); //print rooms of current user
+                    if (MainUtil.checkUserReserv()) {
+                        User currentUser = CurrentUser.getCurrentUser();
+                        try {
+                            interfaceAPI.cancelReservation(MainUtil.roomId(br), currentUser.getId(), MainUtil.hotelId(br));
+                        } catch (InterfaceAPI.NotFoundException | InterfaceAPI.AuthorisationException e) {
+                            System.out.println(e);
+                        }
+                    }
                     else System.out.println("You don't have any reservation.");
                     break;
                 }
@@ -100,7 +108,7 @@ public class Main {
                 {
                    // MethodsForMain.clrscr();
                     try {
-                        Collection<Room> roomsFoundByParams = interfaceAPI.findRoom(MethodsForMain.Parameters(br));
+                        Collection<Room> roomsFoundByParams = interfaceAPI.findRoom(MainUtil.getParameters(br));
                         System.out.println((roomsFoundByParams.size() != 0) ? roomsFoundByParams : "We don't find any matches for these parameters");
                     }catch(NumberFormatException e){
                         System.out.println("Parser error! Wrong format! Need number!");
@@ -116,7 +124,7 @@ public class Main {
                 case "6":
                 {
                     // MethodsForMain.clrscr();
-                    MethodsForMain.PrintUserRooms(); //print rooms of current user
+                    MainUtil.printUserRooms(); //print rooms of current user
                     break;
                 }
                 default:

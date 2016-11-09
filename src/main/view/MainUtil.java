@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * All methods that main use
  */
-public class MethodsForMain {
+public class MainUtil {
 
     //MS: right not it just add 25 empty lines, little bit
     public final static void clrscr(){
@@ -26,7 +26,7 @@ public class MethodsForMain {
         }
     }
 
-    public final static long RoomId(BufferedReader br) throws IOException {
+    public final static long roomId(BufferedReader br) throws IOException {
         System.out.println();
         System.out.println("Enter room's id: ");
         String roomid = br.readLine();
@@ -39,13 +39,13 @@ public class MethodsForMain {
         return Integer.valueOf(userid);
     }*/
 
-    public final static long HotelId(BufferedReader br) throws IOException {
+    public final static long hotelId(BufferedReader br) throws IOException {
         System.out.println("Enter hotel's id: ");
         String hotid = br.readLine();
         return Integer.valueOf(hotid);
     }
 
-    public final static Map<String, String> Parameters(BufferedReader br) throws IOException {
+    public final static Map<String, String> getParameters(BufferedReader br) throws IOException {
         Map<String, String> map = new HashMap<>();
         String choice = "";
         while(!choice.equalsIgnoreCase("no")){
@@ -66,7 +66,7 @@ public class MethodsForMain {
     }
 
     // prints rooms from db, return false if there are no free rooms
-    public final static boolean PrintFreeRooms() throws IOException {
+    public final static boolean printFreeRooms() throws IOException {
         boolean anyReserved = false;
 
         System.out.println("Available rooms:");
@@ -84,7 +84,7 @@ public class MethodsForMain {
     }
 
     //prints rooms reserved by CurrentUser, return false if there are no rooms reserved
-    public final static boolean PrintUserRooms() throws IOException {
+    public final static boolean printUserRooms() throws IOException {
         boolean anyReserved = false;
 
         User currentUser = CurrentUser.getCurrentUser();
@@ -104,7 +104,7 @@ public class MethodsForMain {
         return anyReserved;
     }
 
-    public final static boolean CheckUserReserv() throws IOException {
+    public final static boolean checkUserReserv() throws IOException {
         boolean anyReserved = false;
         User currentUser = CurrentUser.getCurrentUser();
         Collection<Room> rooms = RoomDAOImpl.getInstance().getList();
