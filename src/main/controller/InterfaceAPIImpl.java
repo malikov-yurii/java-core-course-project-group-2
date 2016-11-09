@@ -34,13 +34,6 @@ import java.util.stream.Collectors;
  *  supporting methods:
  *  private Room searchRoom(long roomId, long hotelId)
  *  private User searchUser(long userId)
- *  private boolean validateRoom(Room room, User user)
- *
- *
- *
- *
- *
- *
  */
 public class InterfaceAPIImpl implements InterfaceAPI {
 
@@ -90,7 +83,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
     //searches for Room with given parameters and set isReserved in Room for true
 
     @Override
-    public void bookRoom(long roomId, long userId, long hotelId) throws AlreadyReservedException, NotFoundException   {
+    public void bookRoom(long roomId, long userId, long hotelId) throws NotFoundException   {
 
         //search room and user
         Room room;
@@ -98,11 +91,10 @@ public class InterfaceAPIImpl implements InterfaceAPI {
         User user;
         user = findUser(userId);
 
-
-
         //break method if room is already reserved
         if (room.isReserved()) {
-            throw new AlreadyReservedException("Room "+room.getId()+" is already reserved.");
+            System.out.println("Room "+room.getId()+" is already reserved.");
+            return;
         }
 
         //add user to the room
@@ -127,6 +119,7 @@ public class InterfaceAPIImpl implements InterfaceAPI {
         }
         else
             throw new AuthorisationException("Not authorised for this action");
+
 
         //set isReserved flag for false
         room.setReserved(false);

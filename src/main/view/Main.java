@@ -84,9 +84,7 @@ public class Main {
                     catch (InterfaceAPI.NotFoundException e){
                         System.out.println(e);
                     }
-                    catch(InterfaceAPI.AlreadyReservedException e){
-                        System.out.println(e);
-                    }
+
                     break;
 
 
@@ -99,9 +97,7 @@ public class Main {
                         User currentUser = CurrentUser.getCurrentUser();
                         try {
                             interfaceAPI.cancelReservation(MainUtil.roomId(br), currentUser.getId(), MainUtil.hotelId(br));
-                        } catch (InterfaceAPI.NotFoundException e) {
-                            System.out.println(e);
-                        } catch (InterfaceAPI.AuthorisationException e) {
+                        } catch (InterfaceAPI.NotFoundException | InterfaceAPI.AuthorisationException e) {
                             System.out.println(e);
                         }
                     }
