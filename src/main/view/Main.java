@@ -62,7 +62,7 @@ public class Main {
                     // MethodsForMain.clrscr();
                     System.out.println("Enter name of hotel: ");    //find hotel by name
                     String hotname = br.readLine();
-                    System.out.println("Rezult of your request: "+interfaceAPI.findHotelbyName(hotname));
+                    System.out.println("Result of your request: "+interfaceAPI.findHotelbyName(hotname));
                     break;
                 }
                 case "2":
@@ -70,7 +70,7 @@ public class Main {
                     //MethodsForMain.clrscr();
                     System.out.println("\nEnter city of hotel: ");  //find hotel by city
                     String hotcity = br.readLine();
-                    System.out.println("Rezult of your request: "+interfaceAPI.findHotelbyCity(hotcity));
+                    System.out.println("Result of your request: "+interfaceAPI.findHotelbyCity(hotcity));
                     break;
                 }
                 case "3":
@@ -91,9 +91,11 @@ public class Main {
                 }
                 case "4":
                 {
-                    //MethodsForMain.clrscr();                //cancel reserv
-                    MainUtil.printUserRooms(); //print rooms of current user
-                    if (MainUtil.checkUserReserv()) {
+                    //cancel reserv
+
+                    // /MethodsForMain.clrscr();
+
+                    if ( MainUtil.printUserRooms()) {//print rooms of current user
                         User currentUser = CurrentUser.getCurrentUser();
                         try {
                             interfaceAPI.cancelReservation(MainUtil.roomId(br), currentUser.getId(), MainUtil.hotelId(br));
@@ -101,7 +103,6 @@ public class Main {
                             System.out.println(e);
                         }
                     }
-                    else System.out.println("You don't have any reservation.");
                     break;
                 }
                 case "5":
